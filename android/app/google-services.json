@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "356212123258",
+    "project_id": "auto-fixin-yzifl6",
+    "storage_bucket": "auto-fixin-yzifl6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:356212123258:android:7a605e7dd3938554cd7dc3",
+        "android_client_info": {
+          "package_name": "com.mycompany.autofixin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1nxL6GXi7F5l8Q4GYhZWEBhafuicz02o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

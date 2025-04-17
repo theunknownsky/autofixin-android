@@ -1,13 +1,9 @@
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:ui';
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'reviews_model.dart';
 export 'reviews_model.dart';
 
@@ -98,7 +94,7 @@ class _ReviewsWidgetState extends State<ReviewsWidget> {
                         Align(
                           alignment: AlignmentDirectional(0.0, -1.0),
                           child: Text(
-                            'Reviews: ${widget!.shop?.shopName}',
+                            'Reviews: ${widget.shop?.shopName}',
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
@@ -122,11 +118,11 @@ class _ReviewsWidgetState extends State<ReviewsWidget> {
                               rating: valueOrDefault<double>(
                                 functions.getReviewRatingAverage(
                                     valueOrDefault<int>(
-                                      widget!.shop?.shopStars,
+                                      widget.shop?.shopStars,
                                       0,
                                     ),
                                     valueOrDefault<int>(
-                                      widget!.shopReviewCount,
+                                      widget.shopReviewCount,
                                       1,
                                     )),
                                 0.0,
@@ -141,11 +137,11 @@ class _ReviewsWidgetState extends State<ReviewsWidget> {
                                 formatNumber(
                                   functions.getReviewRatingAverage(
                                       valueOrDefault<int>(
-                                        widget!.shop?.shopStars,
+                                        widget.shop?.shopStars,
                                         0,
                                       ),
                                       valueOrDefault<int>(
-                                        widget!.shopReviewCount,
+                                        widget.shopReviewCount,
                                         1,
                                       )),
                                   formatType: FormatType.custom,
@@ -170,7 +166,7 @@ class _ReviewsWidgetState extends State<ReviewsWidget> {
                           child: Builder(
                             builder: (context) {
                               final review =
-                                  widget!.shop?.shopReviews?.toList() ?? [];
+                                  widget.shop?.shopReviews.toList() ?? [];
 
                               return Column(
                                 mainAxisSize: MainAxisSize.max,

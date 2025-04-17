@@ -3,11 +3,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'delete_pop_up_model.dart';
 export 'delete_pop_up_model.dart';
 
@@ -131,11 +127,11 @@ class _DeletePopUpWidgetState extends State<DeletePopUpWidget> {
                       ...mapToFirestore(
                         {
                           'rider_vehicles':
-                              FieldValue.arrayRemove([widget!.vehicleToDelete]),
+                              FieldValue.arrayRemove([widget.vehicleToDelete]),
                         },
                       ),
                     });
-                    await widget!.vehicleToDelete!.delete();
+                    await widget.vehicleToDelete!.delete();
                     Navigator.pop(context);
                   },
                   text: 'Yes, Delete',

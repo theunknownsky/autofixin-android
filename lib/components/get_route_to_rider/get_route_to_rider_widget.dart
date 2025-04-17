@@ -1,11 +1,8 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'get_route_to_rider_model.dart';
 export 'get_route_to_rider_model.dart';
 
@@ -71,9 +68,9 @@ class _GetRouteToRiderWidgetState extends State<GetRouteToRiderWidget> {
               child: custom_widgets.OsmShowPolylines(
                 width: 390.0,
                 height: 555.0,
-                currentLocation: widget!.currentLocation!,
-                riderLocation: widget!.riderLocation!,
-                polylineLatLngCoords: widget!.polylineCoordinates!,
+                currentLocation: widget.currentLocation!,
+                riderLocation: widget.riderLocation!,
+                polylineLatLngCoords: widget.polylineCoordinates!,
               ),
             ),
           ),

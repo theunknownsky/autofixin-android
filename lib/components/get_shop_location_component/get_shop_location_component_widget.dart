@@ -1,11 +1,8 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'get_shop_location_component_model.dart';
 export 'get_shop_location_component_model.dart';
 
@@ -69,7 +66,7 @@ class _GetShopLocationComponentWidgetState
               child: custom_widgets.OsmShowCurrentLocation(
                 width: 390.0,
                 height: 390.6,
-                currentLocation: widget!.currentLocation!,
+                currentLocation: widget.currentLocation!,
               ),
             ),
           ),

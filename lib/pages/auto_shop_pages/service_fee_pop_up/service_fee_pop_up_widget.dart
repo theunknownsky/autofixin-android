@@ -1,15 +1,11 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'service_fee_pop_up_model.dart';
 export 'service_fee_pop_up_model.dart';
 
@@ -41,12 +37,12 @@ class _ServiceFeePopUpWidgetState extends State<ServiceFeePopUpWidget> {
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.totalServiceFee = widget!.appointment!.appointmentServiceFee;
+      _model.totalServiceFee = widget.appointment!.appointmentServiceFee;
       safeSetState(() {});
     });
 
     _model.serviceFeeFieldTextController ??= TextEditingController(
-        text: widget!.appointment?.appointmentServiceFee.toString());
+        text: widget.appointment?.appointmentServiceFee.toString());
     _model.serviceFeeFieldFocusNode ??= FocusNode();
 
     _model.addServiceFieldTextController ??= TextEditingController();
@@ -133,7 +129,7 @@ class _ServiceFeePopUpWidgetState extends State<ServiceFeePopUpWidget> {
                             Align(
                               alignment: AlignmentDirectional(-1.0, 0.0),
                               child: Text(
-                                'Base Service Fee (${widget!.appointment?.appointmentServiceAvailed})',
+                                'Base Service Fee (${widget.appointment?.appointmentServiceAvailed})',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -460,14 +456,8 @@ class _ServiceFeePopUpWidgetState extends State<ServiceFeePopUpWidget> {
                                     onPressed: () async {
                                       if ((_model.addServiceFieldTextController
                                                       .text !=
-                                                  null &&
-                                              _model.addServiceFieldTextController
-                                                      .text !=
                                                   '') &&
                                           (_model.servicePriceToAddTextController
-                                                      .text !=
-                                                  null &&
-                                              _model.servicePriceToAddTextController
                                                       .text !=
                                                   '')) {
                                         if (!_model.additionalServices.contains(
@@ -710,12 +700,12 @@ class _ServiceFeePopUpWidgetState extends State<ServiceFeePopUpWidget> {
                               return;
                             }
                             _model.insertAtIndexInAdditionalServices(0,
-                                widget!.appointment!.appointmentServiceAvailed);
+                                widget.appointment!.appointmentServiceAvailed);
                             _model.insertAtIndexInAdditionalServicesFees(
-                                0, widget!.appointment!.appointmentServiceFee);
+                                0, widget.appointment!.appointmentServiceFee);
                             safeSetState(() {});
 
-                            await widget!.appointment!.reference.update({
+                            await widget.appointment!.reference.update({
                               ...createAppointmentsRecordData(
                                 appointmentServiceFee: _model.totalServiceFee,
                                 appointmentStatus: 4,

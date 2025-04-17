@@ -3,12 +3,8 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import '/index.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'rider_chat_with_shop_page_model.dart';
 export 'rider_chat_with_shop_page_model.dart';
 
@@ -93,50 +89,50 @@ class _RiderChatWithShopPageWidgetState
                   children: [
                     Align(
                       alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Container(
-                        width: MediaQuery.sizeOf(context).width * 0.9,
-                        decoration: BoxDecoration(),
-                        child: StreamBuilder<List<UsersRecord>>(
-                          stream: queryUsersRecord(
-                            queryBuilder: (usersRecord) => usersRecord.where(
-                              'uid',
-                              isEqualTo: widget!.chatShop?.shopReference?.id,
-                            ),
-                            singleRecord: true,
+                      child: StreamBuilder<List<UsersRecord>>(
+                        stream: queryUsersRecord(
+                          queryBuilder: (usersRecord) => usersRecord.where(
+                            'uid',
+                            isEqualTo: widget.chatShop?.shopReference?.id,
                           ),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 50.0,
-                                  height: 50.0,
-                                  child: CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                      FlutterFlowTheme.of(context).primary,
-                                    ),
+                          singleRecord: true,
+                        ),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 50.0,
+                                height: 50.0,
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    FlutterFlowTheme.of(context).primary,
                                   ),
                                 ),
-                              );
-                            }
-                            List<UsersRecord> columnUsersRecordList =
-                                snapshot.data!;
-                            // Return an empty Container when the item does not exist.
-                            if (snapshot.data!.isEmpty) {
-                              return Container();
-                            }
-                            final columnUsersRecord =
-                                columnUsersRecordList.isNotEmpty
-                                    ? columnUsersRecordList.first
-                                    : null;
+                              ),
+                            );
+                          }
+                          List<UsersRecord> containerUsersRecordList =
+                              snapshot.data!;
+                          // Return an empty Container when the item does not exist.
+                          if (snapshot.data!.isEmpty) {
+                            return Container();
+                          }
+                          final containerUsersRecord =
+                              containerUsersRecordList.isNotEmpty
+                                  ? containerUsersRecordList.first
+                                  : null;
 
-                            return Column(
+                          return Container(
+                            width: MediaQuery.sizeOf(context).width * 0.9,
+                            decoration: BoxDecoration(),
+                            child: Column(
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   valueOrDefault<String>(
-                                    columnUsersRecord?.shopName,
+                                    containerUsersRecord?.shopName,
                                     'Shop Name',
                                   ),
                                   style: FlutterFlowTheme.of(context)
@@ -157,16 +153,16 @@ class _RiderChatWithShopPageWidgetState
                                         RiderAppointmentSheet1Widget.routeName,
                                         queryParameters: {
                                           'shopId': serializeParam(
-                                            columnUsersRecord?.reference,
+                                            containerUsersRecord?.reference,
                                             ParamType.DocumentReference,
                                           ),
                                           'shop': serializeParam(
-                                            columnUsersRecord,
+                                            containerUsersRecord,
                                             ParamType.Document,
                                           ),
                                         }.withoutNulls,
                                         extra: <String, dynamic>{
-                                          'shop': columnUsersRecord,
+                                          'shop': containerUsersRecord,
                                         },
                                       );
                                     },
@@ -201,9 +197,9 @@ class _RiderChatWithShopPageWidgetState
                                   color: Color(0xFFB4ABAB),
                                 ),
                               ],
-                            );
-                          },
-                        ),
+                            ),
+                          );
+                        },
                       ),
                     ),
                     Container(
@@ -215,7 +211,7 @@ class _RiderChatWithShopPageWidgetState
                           queryBuilder: (messagesRecord) => messagesRecord
                               .where(
                                 'chat',
-                                isEqualTo: widget!.chatShop?.reference,
+                                isEqualTo: widget.chatShop?.reference,
                               )
                               .orderBy('timestamp'),
                         ),
@@ -503,7 +499,7 @@ class _RiderChatWithShopPageWidgetState
                                   MessagesRecord.collection.doc();
                               await messagesRecordReference.set({
                                 ...createMessagesRecordData(
-                                  chat: widget!.chatShop?.reference,
+                                  chat: widget.chatShop?.reference,
                                   sender: currentUserReference,
                                   text: _model.chatBoxTextController.text,
                                 ),
@@ -516,7 +512,7 @@ class _RiderChatWithShopPageWidgetState
                               _model.sentMessage =
                                   MessagesRecord.getDocumentFromData({
                                 ...createMessagesRecordData(
-                                  chat: widget!.chatShop?.reference,
+                                  chat: widget.chatShop?.reference,
                                   sender: currentUserReference,
                                   text: _model.chatBoxTextController.text,
                                 ),
@@ -527,7 +523,7 @@ class _RiderChatWithShopPageWidgetState
                                 ),
                               }, messagesRecordReference);
 
-                              await widget!.chatShop!.reference.update({
+                              await widget.chatShop!.reference.update({
                                 ...createChatsRecordData(
                                   lastMessageTimestamp:
                                       _model.sentMessage?.timestamp,

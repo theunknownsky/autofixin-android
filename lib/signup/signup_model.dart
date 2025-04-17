@@ -1,21 +1,8 @@
-import '/auth/firebase_auth/auth_util.dart';
-import '/backend/backend.dart';
-import '/components/get_shop_location_component/get_shop_location_component_widget.dart';
-import '/flutter_flow/flutter_flow_drop_down.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/flutter_flow/upload_data.dart';
-import 'dart:ui';
-import '/flutter_flow/permissions_util.dart';
 import '/index.dart';
 import 'signup_widget.dart' show SignupWidget;
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class SignupModel extends FlutterFlowModel<SignupWidget> {
   ///  Local state fields for this page.
@@ -49,6 +36,15 @@ class SignupModel extends FlutterFlowModel<SignupWidget> {
       servicePrices.insert(index, item);
   void updateServicePricesAtIndex(int index, Function(int) updateFn) =>
       servicePrices[index] = updateFn(servicePrices[index]);
+
+  List<String> mechanics = ['John Doe'];
+  void addToMechanics(String item) => mechanics.add(item);
+  void removeFromMechanics(String item) => mechanics.remove(item);
+  void removeAtIndexFromMechanics(int index) => mechanics.removeAt(index);
+  void insertAtIndexInMechanics(int index, String item) =>
+      mechanics.insert(index, item);
+  void updateMechanicsAtIndex(int index, Function(String) updateFn) =>
+      mechanics[index] = updateFn(mechanics[index]);
 
   ///  State fields for stateful widgets in this page.
 
@@ -210,6 +206,10 @@ class SignupModel extends FlutterFlowModel<SignupWidget> {
   TextEditingController? servicePriceToAddTextController;
   String? Function(BuildContext, String?)?
       servicePriceToAddTextControllerValidator;
+  // State field(s) for mechanicToAdd widget.
+  FocusNode? mechanicToAddFocusNode;
+  TextEditingController? mechanicToAddTextController;
+  String? Function(BuildContext, String?)? mechanicToAddTextControllerValidator;
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
@@ -269,5 +269,8 @@ class SignupModel extends FlutterFlowModel<SignupWidget> {
 
     servicePriceToAddFocusNode?.dispose();
     servicePriceToAddTextController?.dispose();
+
+    mechanicToAddFocusNode?.dispose();
+    mechanicToAddTextController?.dispose();
   }
 }

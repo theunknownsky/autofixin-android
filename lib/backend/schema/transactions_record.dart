@@ -61,6 +61,11 @@ class TransactionsRecord extends FirestoreRecord {
   List<int> get transactionServicesFees => _transactionServicesFees ?? const [];
   bool hasTransactionServicesFees() => _transactionServicesFees != null;
 
+  // "transaction_mechanic" field.
+  String? _transactionMechanic;
+  String get transactionMechanic => _transactionMechanic ?? '';
+  bool hasTransactionMechanic() => _transactionMechanic != null;
+
   void _initializeFields() {
     _transactionId = snapshotData['transaction_id'] as String?;
     _transactionServiceAvailed =
@@ -74,6 +79,7 @@ class TransactionsRecord extends FirestoreRecord {
     _transactionServices = getDataList(snapshotData['transaction_services']);
     _transactionServicesFees =
         getDataList(snapshotData['transaction_services_fees']);
+    _transactionMechanic = snapshotData['transaction_mechanic'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -118,6 +124,7 @@ Map<String, dynamic> createTransactionsRecordData({
   DocumentReference? transactionShop,
   DocumentReference? transactionRider,
   String? transactionMode,
+  String? transactionMechanic,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -128,6 +135,7 @@ Map<String, dynamic> createTransactionsRecordData({
       'transaction_shop': transactionShop,
       'transaction_rider': transactionRider,
       'transaction_mode': transactionMode,
+      'transaction_mechanic': transactionMechanic,
     }.withoutNulls,
   );
 
@@ -150,7 +158,8 @@ class TransactionsRecordDocumentEquality
         e1?.transactionMode == e2?.transactionMode &&
         listEquality.equals(e1?.transactionServices, e2?.transactionServices) &&
         listEquality.equals(
-            e1?.transactionServicesFees, e2?.transactionServicesFees);
+            e1?.transactionServicesFees, e2?.transactionServicesFees) &&
+        e1?.transactionMechanic == e2?.transactionMechanic;
   }
 
   @override
@@ -163,7 +172,8 @@ class TransactionsRecordDocumentEquality
         e?.transactionRider,
         e?.transactionMode,
         e?.transactionServices,
-        e?.transactionServicesFees
+        e?.transactionServicesFees,
+        e?.transactionMechanic
       ]);
 
   @override

@@ -2,11 +2,9 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'shop_signup_page2_model.dart';
 export 'shop_signup_page2_model.dart';
 
@@ -491,9 +489,6 @@ class _ShopSignupPage2WidgetState extends State<ShopSignupPage2Widget> {
                                     onPressed: () async {
                                       if (_model.serviceToAddTextController
                                                   .text !=
-                                              null &&
-                                          _model.serviceToAddTextController
-                                                  .text !=
                                               '') {
                                         if (!_model.services.contains(_model
                                             .serviceToAddTextController.text)) {
@@ -609,23 +604,23 @@ class _ShopSignupPage2WidgetState extends State<ShopSignupPage2Widget> {
                               ShopSignupPage3Widget.routeName,
                               queryParameters: {
                                 'shopName': serializeParam(
-                                  widget!.shopName,
+                                  widget.shopName,
                                   ParamType.String,
                                 ),
                                 'shopEmail': serializeParam(
-                                  widget!.shopEmail,
+                                  widget.shopEmail,
                                   ParamType.String,
                                 ),
                                 'openingHour': serializeParam(
-                                  widget!.openingHour,
+                                  widget.openingHour,
                                   ParamType.DateTime,
                                 ),
                                 'closingHour': serializeParam(
-                                  widget!.closingHour,
+                                  widget.closingHour,
                                   ParamType.DateTime,
                                 ),
                                 'towingAvailability': serializeParam(
-                                  widget!.towingAvailability,
+                                  widget.towingAvailability,
                                   ParamType.bool,
                                 ),
                                 'businessPermitNumber': serializeParam(

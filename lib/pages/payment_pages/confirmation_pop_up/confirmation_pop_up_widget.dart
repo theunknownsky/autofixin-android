@@ -1,14 +1,9 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import '/index.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'confirmation_pop_up_model.dart';
 export 'confirmation_pop_up_model.dart';
 
@@ -95,7 +90,7 @@ class _ConfirmationPopUpWidgetState extends State<ConfirmationPopUpWidget> {
             padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
             child: Text(
               valueOrDefault<String>(
-                widget!.shop?.shopName,
+                widget.shop?.shopName,
                 'Fetching shop name...',
               ),
               textAlign: TextAlign.center,
@@ -111,7 +106,7 @@ class _ConfirmationPopUpWidgetState extends State<ConfirmationPopUpWidget> {
             padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
             child: Text(
               valueOrDefault<String>(
-                widget!.shop?.shopContactNumber,
+                widget.shop?.shopContactNumber,
                 'Fetching shop number...',
               ),
               textAlign: TextAlign.center,
@@ -152,14 +147,97 @@ class _ConfirmationPopUpWidgetState extends State<ConfirmationPopUpWidget> {
                 ),
                 FFButtonWidget(
                   onPressed: () async {
-                    await widget!.appointment!.reference
+                    await widget.appointment!.reference
                         .update(createAppointmentsRecordData(
                       appointmentTransactionMode: 'GCash',
                       appointmentStatus: 5,
                     ));
+
+                    var transactionsRecordReference = TransactionsRecord
+                        .collection
+                        .doc(widget.appointment!.reference.id);
+                    await transactionsRecordReference.set({
+                      ...createTransactionsRecordData(
+                        transactionServiceAvailed:
+                            widget.appointment?.appointmentServiceAvailed,
+                        transactionShop: widget.appointment?.appointmentShop,
+                        transactionServiceFee:
+                            widget.appointment?.appointmentServiceFee,
+                        transactionTimestamp: getCurrentTimestamp,
+                        transactionRider: widget.appointment?.appointmentRider,
+                        transactionMode:
+                            widget.appointment?.appointmentTransactionMode,
+                        transactionMechanic:
+                            widget.appointment?.appointmentMechanic,
+                      ),
+                      ...mapToFirestore(
+                        {
+                          'transaction_services':
+                              widget.appointment?.appointmentServices,
+                          'transaction_services_fees':
+                              widget.appointment?.appointmentServicesFeesList,
+                        },
+                      ),
+                    });
+                    _model.createdTransaction =
+                        TransactionsRecord.getDocumentFromData({
+                      ...createTransactionsRecordData(
+                        transactionServiceAvailed:
+                            widget.appointment?.appointmentServiceAvailed,
+                        transactionShop: widget.appointment?.appointmentShop,
+                        transactionServiceFee:
+                            widget.appointment?.appointmentServiceFee,
+                        transactionTimestamp: getCurrentTimestamp,
+                        transactionRider: widget.appointment?.appointmentRider,
+                        transactionMode:
+                            widget.appointment?.appointmentTransactionMode,
+                        transactionMechanic:
+                            widget.appointment?.appointmentMechanic,
+                      ),
+                      ...mapToFirestore(
+                        {
+                          'transaction_services':
+                              widget.appointment?.appointmentServices,
+                          'transaction_services_fees':
+                              widget.appointment?.appointmentServicesFeesList,
+                        },
+                      ),
+                    }, transactionsRecordReference);
+
+                    await widget.appointment!.appointmentShop!.update({
+                      ...mapToFirestore(
+                        {
+                          'user_transactions': FieldValue.arrayUnion(
+                              [_model.createdTransaction?.reference]),
+                        },
+                      ),
+                    });
+
+                    await widget.appointment!.appointmentRider!.update({
+                      ...mapToFirestore(
+                        {
+                          'user_transactions': FieldValue.arrayUnion(
+                              [_model.createdTransaction?.reference]),
+                        },
+                      ),
+                    });
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          'Payment confirmed.',
+                          style: TextStyle(
+                            color: FlutterFlowTheme.of(context).primaryText,
+                          ),
+                        ),
+                        duration: Duration(milliseconds: 4000),
+                        backgroundColor: FlutterFlowTheme.of(context).secondary,
+                      ),
+                    );
                     Navigator.pop(context);
 
                     context.pushNamed(RiderAppointmentPageWidget.routeName);
+
+                    safeSetState(() {});
                   },
                   text: 'Confirm',
                   options: FFButtonOptions(

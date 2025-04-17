@@ -1,12 +1,9 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:ui';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'rider_bottom_navbar_model.dart';
 export 'rider_bottom_navbar_model.dart';
 
@@ -39,25 +36,25 @@ class _RiderBottomNavbarWidgetState extends State<RiderBottomNavbarWidget> {
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (widget!.currentActiveNav == 1) {
+      if (widget.currentActiveNav == 1) {
         _model.mapColor = FlutterFlowTheme.of(context).primary;
         _model.vehicleColor = FlutterFlowTheme.of(context).secondaryText;
         _model.chatColor = FlutterFlowTheme.of(context).secondaryText;
         _model.accountColor = FlutterFlowTheme.of(context).secondaryText;
         safeSetState(() {});
-      } else if (widget!.currentActiveNav == 2) {
+      } else if (widget.currentActiveNav == 2) {
         _model.mapColor = FlutterFlowTheme.of(context).secondaryText;
         _model.vehicleColor = FlutterFlowTheme.of(context).primary;
         _model.chatColor = FlutterFlowTheme.of(context).secondaryText;
         _model.accountColor = FlutterFlowTheme.of(context).secondaryText;
         safeSetState(() {});
-      } else if (widget!.currentActiveNav == 3) {
+      } else if (widget.currentActiveNav == 3) {
         _model.mapColor = FlutterFlowTheme.of(context).secondaryText;
         _model.vehicleColor = FlutterFlowTheme.of(context).secondaryText;
         _model.chatColor = FlutterFlowTheme.of(context).primary;
         _model.accountColor = FlutterFlowTheme.of(context).secondaryText;
         safeSetState(() {});
-      } else if (widget!.currentActiveNav == 4) {
+      } else if (widget.currentActiveNav == 4) {
         _model.mapColor = FlutterFlowTheme.of(context).secondaryText;
         _model.vehicleColor = FlutterFlowTheme.of(context).secondaryText;
         _model.chatColor = FlutterFlowTheme.of(context).secondaryText;

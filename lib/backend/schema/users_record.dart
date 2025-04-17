@@ -166,6 +166,11 @@ class UsersRecord extends FirestoreRecord {
   String get shopContactNumber => _shopContactNumber ?? '';
   bool hasShopContactNumber() => _shopContactNumber != null;
 
+  // "shop_mechanics" field.
+  List<String>? _shopMechanics;
+  List<String> get shopMechanics => _shopMechanics ?? const [];
+  bool hasShopMechanics() => _shopMechanics != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -199,6 +204,7 @@ class UsersRecord extends FirestoreRecord {
     _shopStars = castToType<int>(snapshotData['shop_stars']);
     _shopServicesPrices = getDataList(snapshotData['shop_services_prices']);
     _shopContactNumber = snapshotData['shop_contact_number'] as String?;
+    _shopMechanics = getDataList(snapshotData['shop_mechanics']);
   }
 
   static CollectionReference get collection =>
@@ -327,7 +333,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.shopRating == e2?.shopRating &&
         e1?.shopStars == e2?.shopStars &&
         listEquality.equals(e1?.shopServicesPrices, e2?.shopServicesPrices) &&
-        e1?.shopContactNumber == e2?.shopContactNumber;
+        e1?.shopContactNumber == e2?.shopContactNumber &&
+        listEquality.equals(e1?.shopMechanics, e2?.shopMechanics);
   }
 
   @override
@@ -361,7 +368,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.shopRating,
         e?.shopStars,
         e?.shopServicesPrices,
-        e?.shopContactNumber
+        e?.shopContactNumber,
+        e?.shopMechanics
       ]);
 
   @override

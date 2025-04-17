@@ -7,14 +7,10 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
-import 'dart:ui';
 import '/flutter_flow/permissions_util.dart';
 import '/index.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'signup_model.dart';
 export 'signup_model.dart';
 
@@ -74,6 +70,9 @@ class _SignupWidgetState extends State<SignupWidget> {
 
     _model.servicePriceToAddTextController ??= TextEditingController();
     _model.servicePriceToAddFocusNode ??= FocusNode();
+
+    _model.mechanicToAddTextController ??= TextEditingController();
+    _model.mechanicToAddFocusNode ??= FocusNode();
   }
 
   @override
@@ -2665,14 +2664,8 @@ class _SignupWidgetState extends State<SignupWidget> {
                                             onPressed: () async {
                                               if ((_model.serviceToAddTextController
                                                               .text !=
-                                                          null &&
-                                                      _model.serviceToAddTextController
-                                                              .text !=
                                                           '') &&
                                                   (_model.servicePriceToAddTextController
-                                                              .text !=
-                                                          null &&
-                                                      _model.servicePriceToAddTextController
                                                               .text !=
                                                           '')) {
                                                 if (!_model.services.contains(
@@ -2713,22 +2706,10 @@ class _SignupWidgetState extends State<SignupWidget> {
                                                   safeSetState(() {
                                                     _model
                                                         .serviceToAddTextController
-                                                        ?.text = 'Service';
-                                                    _model.serviceToAddFocusNode
-                                                        ?.requestFocus();
-                                                    WidgetsBinding.instance
-                                                        .addPostFrameCallback(
-                                                            (_) {
-                                                      _model.serviceToAddTextController
-                                                              ?.selection =
-                                                          TextSelection
-                                                              .collapsed(
-                                                        offset: _model
-                                                            .serviceToAddTextController!
-                                                            .text
-                                                            .length,
-                                                      );
-                                                    });
+                                                        ?.clear();
+                                                    _model
+                                                        .servicePriceToAddTextController
+                                                        ?.clear();
                                                   });
                                                 } else {
                                                   ScaffoldMessenger.of(context)
@@ -2814,6 +2795,350 @@ class _SignupWidgetState extends State<SignupWidget> {
                                       ),
                                     ],
                                   ),
+                                  Align(
+                                    alignment: AlignmentDirectional(-1.0, 0.0),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 16.0, 0.0, 0.0),
+                                      child: Text(
+                                        'Mechanics',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 1.0,
+                                    height: 42.0,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      border: Border.all(
+                                        color: FlutterFlowTheme.of(context)
+                                            .formBorderColor,
+                                        width: 2.0,
+                                      ),
+                                    ),
+                                    child: Builder(
+                                      builder: (context) {
+                                        final mechanicsList =
+                                            _model.mechanics.toList();
+
+                                        return SingleChildScrollView(
+                                          scrollDirection: Axis.horizontal,
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: List.generate(
+                                                mechanicsList.length,
+                                                (mechanicsListIndex) {
+                                              final mechanicsListItem =
+                                                  mechanicsList[
+                                                      mechanicsListIndex];
+                                              return InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onDoubleTap: () async {
+                                                  _model
+                                                      .removeAtIndexFromMechanics(
+                                                          mechanicsListIndex);
+                                                  safeSetState(() {});
+                                                },
+                                                child: FFButtonWidget(
+                                                  onPressed: () {
+                                                    print('Button pressed ...');
+                                                  },
+                                                  text: mechanicsListItem,
+                                                  icon: Icon(
+                                                    Icons.close,
+                                                    size: 15.0,
+                                                  ),
+                                                  options: FFButtonOptions(
+                                                    height: 40.0,
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(16.0, 0.0,
+                                                                16.0, 0.0),
+                                                    iconAlignment:
+                                                        IconAlignment.end,
+                                                    iconPadding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                0.0, 0.0),
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .blackButton,
+                                                    textStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .labelLarge
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .blackBGFontColor,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                    elevation: 0.0,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                ),
+                                              );
+                                            }),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Expanded(
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 8.0, 0.0),
+                                          child: Container(
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                1.0,
+                                            child: TextFormField(
+                                              controller: _model
+                                                  .mechanicToAddTextController,
+                                              focusNode:
+                                                  _model.mechanicToAddFocusNode,
+                                              autofocus: false,
+                                              obscureText: false,
+                                              decoration: InputDecoration(
+                                                isDense: true,
+                                                labelStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                hintText: 'Mechanic Name',
+                                                hintStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .hintFontColor,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .formBorderColor,
+                                                    width: 2.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .greenButton,
+                                                    width: 2.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                ),
+                                                errorBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .error,
+                                                    width: 2.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                ),
+                                                focusedErrorBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .error,
+                                                    width: 2.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                ),
+                                                filled: true,
+                                                fillColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryBackground,
+                                                contentPadding:
+                                                    EdgeInsetsDirectional
+                                                        .fromSTEB(16.0, 16.0,
+                                                            16.0, 16.0),
+                                              ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                              textAlign: TextAlign.start,
+                                              cursorColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                              validator: _model
+                                                  .mechanicToAddTextControllerValidator
+                                                  .asValidator(context),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      FFButtonWidget(
+                                        onPressed: () async {
+                                          if (_model.mechanicToAddTextController
+                                                      .text !=
+                                                  '') {
+                                            if (!_model.mechanics.contains(
+                                                _model
+                                                    .mechanicToAddTextController
+                                                    .text)) {
+                                              _model.addToMechanics(_model
+                                                  .mechanicToAddTextController
+                                                  .text);
+                                              safeSetState(() {});
+                                              ScaffoldMessenger.of(context)
+                                                  .clearSnackBars();
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    'Mechanic successfully added.',
+                                                    style: GoogleFonts.getFont(
+                                                      'Poppins',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .blackBGFontColor,
+                                                    ),
+                                                  ),
+                                                  duration: Duration(
+                                                      milliseconds: 2500),
+                                                  backgroundColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .blackButton,
+                                                ),
+                                              );
+                                              safeSetState(() {
+                                                _model
+                                                    .mechanicToAddTextController
+                                                    ?.clear();
+                                              });
+                                            } else {
+                                              ScaffoldMessenger.of(context)
+                                                  .clearSnackBars();
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    'Mechanic already exists.',
+                                                    style: GoogleFonts.getFont(
+                                                      'Poppins',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .blackBGFontColor,
+                                                    ),
+                                                  ),
+                                                  duration: Duration(
+                                                      milliseconds: 4000),
+                                                  backgroundColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .blackButton,
+                                                ),
+                                              );
+                                            }
+                                          } else {
+                                            ScaffoldMessenger.of(context)
+                                                .clearSnackBars();
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  'Please fill out the mechanic field.',
+                                                  style: GoogleFonts.getFont(
+                                                    'Poppins',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .blackBGFontColor,
+                                                  ),
+                                                ),
+                                                duration: Duration(
+                                                    milliseconds: 4000),
+                                                backgroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .blackButton,
+                                              ),
+                                            );
+                                          }
+                                        },
+                                        text: 'Add',
+                                        options: FFButtonOptions(
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  0.2,
+                                          height: 40.0,
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16.0, 0.0, 16.0, 0.0),
+                                          iconPadding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelLarge
+                                              .override(
+                                                fontFamily: 'Poppins',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .greenBGFontColor,
+                                                letterSpacing: 0.0,
+                                              ),
+                                          elevation: 0.0,
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ],
                               ),
                             ),
@@ -2828,7 +3153,8 @@ class _SignupWidgetState extends State<SignupWidget> {
                                   return;
                                 }
                                 await requestPermission(locationPermission);
-                                if (_model.services.length > 1) {
+                                if ((_model.services.length > 1) &&
+                                    (_model.mechanics.length > 0)) {
                                   await _model.pageViewController?.nextPage(
                                     duration: Duration(milliseconds: 300),
                                     curve: Curves.ease,
@@ -2839,7 +3165,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(
-                                        'Please put at least two services.',
+                                        'Please put at least two services and one mechanic.',
                                         style: TextStyle(
                                           color: FlutterFlowTheme.of(context)
                                               .blackBGFontColor,
@@ -3052,6 +3378,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                                       'shop_services': _model.services,
                                       'shop_services_prices':
                                           _model.servicePrices,
+                                      'shop_mechanics': _model.mechanics,
                                     },
                                   ),
                                 });

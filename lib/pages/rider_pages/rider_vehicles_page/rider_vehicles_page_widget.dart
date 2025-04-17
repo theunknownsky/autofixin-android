@@ -7,13 +7,8 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/rider_pages/add_pop_up/add_pop_up_widget.dart';
 import '/pages/rider_pages/delete_pop_up/delete_pop_up_widget.dart';
 import '/pages/rider_pages/edit_pop_up/edit_pop_up_widget.dart';
-import 'dart:ui';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'rider_vehicles_page_model.dart';
 export 'rider_vehicles_page_model.dart';
 
@@ -40,7 +35,7 @@ class _RiderVehiclesPageWidgetState extends State<RiderVehiclesPageWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.vehiclesList = (currentUserDocument?.riderVehicles?.toList() ?? [])
+      _model.vehiclesList = (currentUserDocument?.riderVehicles.toList() ?? [])
           .toList()
           .cast<DocumentReference>();
       safeSetState(() {});

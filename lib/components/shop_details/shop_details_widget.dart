@@ -4,17 +4,13 @@ import '/components/reviews/reviews_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'shop_details_model.dart';
 export 'shop_details_model.dart';
 
@@ -49,12 +45,12 @@ class _ShopDetailsWidgetState extends State<ShopDetailsWidget> {
       _model.reviewCount = await queryReviewsRecordCount(
         queryBuilder: (reviewsRecord) => reviewsRecord.where(
           'shop',
-          isEqualTo: widget!.shop?.reference,
+          isEqualTo: widget.shop?.reference,
         ),
       );
       _model.serviceWithPrices = await actions.getShopServicesWithPrices(
-        widget!.shop!.shopServices.toList(),
-        widget!.shop!.shopServicesPrices.toList(),
+        widget.shop!.shopServices.toList(),
+        widget.shop!.shopServicesPrices.toList(),
       );
       _model.servicesWithPrice =
           _model.serviceWithPrices!.toList().cast<String>();
@@ -110,7 +106,7 @@ class _ShopDetailsWidgetState extends State<ShopDetailsWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 60.0, 0.0, 0.0),
                 child: Text(
                   valueOrDefault<String>(
-                    widget!.shop?.shopName,
+                    widget.shop?.shopName,
                     'Selected Shop',
                   ),
                   style: FlutterFlowTheme.of(context).headlineSmall.override(
@@ -138,7 +134,7 @@ class _ShopDetailsWidgetState extends State<ShopDetailsWidget> {
                             alignment: AlignmentDirectional(0.0, 0.0)
                                 .resolve(Directionality.of(context)),
                             child: ReviewsWidget(
-                              shop: widget!.shop!,
+                              shop: widget.shop!,
                               shopReviewCount: valueOrDefault<int>(
                                 _model.revCount,
                                 1,
@@ -161,7 +157,7 @@ class _ShopDetailsWidgetState extends State<ShopDetailsWidget> {
                           rating: valueOrDefault<double>(
                             functions.getReviewRatingAverage(
                                 valueOrDefault<int>(
-                                  widget!.shop?.shopStars,
+                                  widget.shop?.shopStars,
                                   0,
                                 ),
                                 valueOrDefault<int>(
@@ -179,7 +175,7 @@ class _ShopDetailsWidgetState extends State<ShopDetailsWidget> {
                             formatNumber(
                               functions.getReviewRatingAverage(
                                   valueOrDefault<int>(
-                                    widget!.shop?.shopStars,
+                                    widget.shop?.shopStars,
                                     0,
                                   ),
                                   valueOrDefault<int>(
@@ -239,7 +235,7 @@ class _ShopDetailsWidgetState extends State<ShopDetailsWidget> {
                             ),
                             child: Checkbox(
                               value: _model.checkboxValue ??=
-                                  widget!.shop!.shopTowingAvailability,
+                                  widget.shop!.shopTowingAvailability,
                               onChanged: (newValue) async {
                                 safeSetState(
                                     () => _model.checkboxValue = newValue!);
@@ -271,7 +267,7 @@ class _ShopDetailsWidgetState extends State<ShopDetailsWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 6.0, 0.0, 0.0),
                           child: Text(
-                            '${dateTimeFormat("jm", widget!.shop?.shopOpeningHour)} - ${dateTimeFormat("jm", widget!.shop?.shopClosingHour)}',
+                            '${dateTimeFormat("jm", widget.shop?.shopOpeningHour)} - ${dateTimeFormat("jm", widget.shop?.shopClosingHour)}',
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
@@ -360,8 +356,8 @@ class _ShopDetailsWidgetState extends State<ShopDetailsWidget> {
                   children: [
                     FFButtonWidget(
                       onPressed: !functions.checkShopIfOpen(
-                              widget!.shop!.shopOpeningHour!,
-                              widget!.shop!.shopClosingHour!,
+                              widget.shop!.shopOpeningHour!,
+                              widget.shop!.shopClosingHour!,
                               getCurrentTimestamp)
                           ? null
                           : () async {
@@ -369,16 +365,16 @@ class _ShopDetailsWidgetState extends State<ShopDetailsWidget> {
                                 RiderAppointmentSheet1Widget.routeName,
                                 queryParameters: {
                                   'shopId': serializeParam(
-                                    widget!.shop?.reference,
+                                    widget.shop?.reference,
                                     ParamType.DocumentReference,
                                   ),
                                   'shop': serializeParam(
-                                    widget!.shop,
+                                    widget.shop,
                                     ParamType.Document,
                                   ),
                                 }.withoutNulls,
                                 extra: <String, dynamic>{
-                                  'shop': widget!.shop,
+                                  'shop': widget.shop,
                                 },
                               );
 
@@ -413,7 +409,7 @@ class _ShopDetailsWidgetState extends State<ShopDetailsWidget> {
                               )
                               .where(
                                 'shop_reference',
-                                isEqualTo: widget!.shop?.reference,
+                                isEqualTo: widget.shop?.reference,
                               ),
                         );
                         if (_model.chatExists == 0) {
@@ -422,7 +418,7 @@ class _ShopDetailsWidgetState extends State<ShopDetailsWidget> {
                           await messagesRecordReference.set({
                             ...createMessagesRecordData(
                               text: 'Hello! How we may help you?',
-                              sender: widget!.shop?.reference,
+                              sender: widget.shop?.reference,
                             ),
                             ...mapToFirestore(
                               {
@@ -434,7 +430,7 @@ class _ShopDetailsWidgetState extends State<ShopDetailsWidget> {
                               MessagesRecord.getDocumentFromData({
                             ...createMessagesRecordData(
                               text: 'Hello! How we may help you?',
-                              sender: widget!.shop?.reference,
+                              sender: widget.shop?.reference,
                             ),
                             ...mapToFirestore(
                               {
@@ -448,7 +444,7 @@ class _ShopDetailsWidgetState extends State<ShopDetailsWidget> {
                           await chatsRecordReference.set({
                             ...createChatsRecordData(
                               riderReference: currentUserReference,
-                              shopReference: widget!.shop?.reference,
+                              shopReference: widget.shop?.reference,
                               lastMessage: _model.introMessage?.text,
                               lastMessageTimestamp:
                                   _model.introMessage?.timestamp,
@@ -462,7 +458,7 @@ class _ShopDetailsWidgetState extends State<ShopDetailsWidget> {
                           _model.createdChat = ChatsRecord.getDocumentFromData({
                             ...createChatsRecordData(
                               riderReference: currentUserReference,
-                              shopReference: widget!.shop?.reference,
+                              shopReference: widget.shop?.reference,
                               lastMessage: _model.introMessage?.text,
                               lastMessageTimestamp:
                                   _model.introMessage?.timestamp,
@@ -500,7 +496,7 @@ class _ShopDetailsWidgetState extends State<ShopDetailsWidget> {
                                 )
                                 .where(
                                   'shop_reference',
-                                  isEqualTo: widget!.shop?.reference,
+                                  isEqualTo: widget.shop?.reference,
                                 ),
                             singleRecord: true,
                           ).then((s) => s.firstOrNull);

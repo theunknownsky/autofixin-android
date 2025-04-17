@@ -5,12 +5,8 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import '/index.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'rider_appointment_sheet1_model.dart';
 export 'rider_appointment_sheet1_model.dart';
 
@@ -103,7 +99,7 @@ class _RiderAppointmentSheet1WidgetState
                     builder: (context) => Builder(
                       builder: (context) {
                         final vehicle =
-                            (currentUserDocument?.riderVehicles?.toList() ?? [])
+                            (currentUserDocument?.riderVehicles.toList() ?? [])
                                 .toList();
 
                         return SingleChildScrollView(
@@ -549,17 +545,17 @@ class _RiderAppointmentSheet1WidgetState
                               ParamType.Document,
                             ),
                             'shop': serializeParam(
-                              widget!.shop,
+                              widget.shop,
                               ParamType.Document,
                             ),
                             'shopId': serializeParam(
-                              widget!.shopId,
+                              widget.shopId,
                               ParamType.DocumentReference,
                             ),
                           }.withoutNulls,
                           extra: <String, dynamic>{
                             'vehicle': _model.selectedCar,
-                            'shop': widget!.shop,
+                            'shop': widget.shop,
                           },
                         );
                       }

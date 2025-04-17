@@ -4,10 +4,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/payment_pages/confirmation_pop_up/confirmation_pop_up_widget.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'gcash_payment_page_model.dart';
 export 'gcash_payment_page_model.dart';
 
@@ -108,7 +105,7 @@ class _GcashPaymentPageWidgetState extends State<GcashPaymentPageWidget> {
                       children: [
                         Text(
                           valueOrDefault<String>(
-                            widget!.shopDetails?.shopName,
+                            widget.shopDetails?.shopName,
                             'Fetching shop name...',
                           ),
                           style:
@@ -124,7 +121,7 @@ class _GcashPaymentPageWidgetState extends State<GcashPaymentPageWidget> {
                           alignment: AlignmentDirectional(0.0, 0.0),
                           child: Text(
                             valueOrDefault<String>(
-                              widget!.shopDetails?.shopContactNumber,
+                              widget.shopDetails?.shopContactNumber,
                               'Fetching shop number...',
                             ),
                             textAlign: TextAlign.center,
@@ -177,9 +174,9 @@ class _GcashPaymentPageWidgetState extends State<GcashPaymentPageWidget> {
                                   ),
                                   Builder(
                                     builder: (context) {
-                                      final servicesAvailed = widget!
+                                      final servicesAvailed = widget
                                               .appointment?.appointmentServices
-                                              ?.toList() ??
+                                              .toList() ??
                                           [];
 
                                       return Column(
@@ -230,9 +227,9 @@ class _GcashPaymentPageWidgetState extends State<GcashPaymentPageWidget> {
                                   ),
                                   Builder(
                                     builder: (context) {
-                                      final servicesFees = widget!.appointment
+                                      final servicesFees = widget.appointment
                                               ?.appointmentServicesFeesList
-                                              ?.toList() ??
+                                              .toList() ??
                                           [];
 
                                       return Column(
@@ -286,7 +283,7 @@ class _GcashPaymentPageWidgetState extends State<GcashPaymentPageWidget> {
                                   ),
                                   Text(
                                     formatNumber(
-                                      widget!
+                                      widget
                                           .appointment!.appointmentServiceFee,
                                       formatType: FormatType.custom,
                                       format: 'Php 0.00',
@@ -335,8 +332,8 @@ class _GcashPaymentPageWidgetState extends State<GcashPaymentPageWidget> {
                               child: Container(
                                 height: 400.0,
                                 child: ConfirmationPopUpWidget(
-                                  appointment: widget!.appointment!,
-                                  shop: widget!.shopDetails!,
+                                  appointment: widget.appointment!,
+                                  shop: widget.shopDetails!,
                                 ),
                               ),
                             ),

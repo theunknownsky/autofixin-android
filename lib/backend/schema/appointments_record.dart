@@ -72,6 +72,11 @@ class AppointmentsRecord extends FirestoreRecord {
       _appointmentServicesFeesList ?? const [];
   bool hasAppointmentServicesFeesList() => _appointmentServicesFeesList != null;
 
+  // "appointment_mechanic" field.
+  String? _appointmentMechanic;
+  String get appointmentMechanic => _appointmentMechanic ?? '';
+  bool hasAppointmentMechanic() => _appointmentMechanic != null;
+
   void _initializeFields() {
     _appointmentStatus = castToType<int>(snapshotData['appointment_status']);
     _appointmentVehicle =
@@ -89,6 +94,7 @@ class AppointmentsRecord extends FirestoreRecord {
     _appointmentServices = getDataList(snapshotData['appointment_services']);
     _appointmentServicesFeesList =
         getDataList(snapshotData['appointment_services_fees_list']);
+    _appointmentMechanic = snapshotData['appointment_mechanic'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -135,6 +141,7 @@ Map<String, dynamic> createAppointmentsRecordData({
   int? appointmentServiceFee,
   String? appointmentServiceAvailed,
   String? appointmentTransactionMode,
+  String? appointmentMechanic,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -147,6 +154,7 @@ Map<String, dynamic> createAppointmentsRecordData({
       'appointment_service_fee': appointmentServiceFee,
       'appointment_service_availed': appointmentServiceAvailed,
       'appointment_transaction_mode': appointmentTransactionMode,
+      'appointment_mechanic': appointmentMechanic,
     }.withoutNulls,
   );
 
@@ -171,7 +179,8 @@ class AppointmentsRecordDocumentEquality
         e1?.appointmentTransactionMode == e2?.appointmentTransactionMode &&
         listEquality.equals(e1?.appointmentServices, e2?.appointmentServices) &&
         listEquality.equals(
-            e1?.appointmentServicesFeesList, e2?.appointmentServicesFeesList);
+            e1?.appointmentServicesFeesList, e2?.appointmentServicesFeesList) &&
+        e1?.appointmentMechanic == e2?.appointmentMechanic;
   }
 
   @override
@@ -186,7 +195,8 @@ class AppointmentsRecordDocumentEquality
         e?.appointmentServiceAvailed,
         e?.appointmentTransactionMode,
         e?.appointmentServices,
-        e?.appointmentServicesFeesList
+        e?.appointmentServicesFeesList,
+        e?.appointmentMechanic
       ]);
 
   @override

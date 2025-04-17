@@ -1,23 +1,10 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/components/get_shop_location_component/get_shop_location_component_widget.dart';
 import '/components/rider_bottom_navbar/rider_bottom_navbar_widget.dart';
-import '/flutter_flow/flutter_flow_drop_down.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import 'dart:ui';
-import '/custom_code/actions/index.dart' as actions;
-import '/flutter_flow/permissions_util.dart';
 import '/index.dart';
 import 'rider_appointment_sheet2_widget.dart' show RiderAppointmentSheet2Widget;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class RiderAppointmentSheet2Model
     extends FlutterFlowModel<RiderAppointmentSheet2Widget> {

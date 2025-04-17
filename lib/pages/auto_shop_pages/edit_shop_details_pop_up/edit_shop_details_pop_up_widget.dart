@@ -3,13 +3,9 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'edit_shop_details_pop_up_model.dart';
 export 'edit_shop_details_pop_up_model.dart';
 
@@ -38,13 +34,13 @@ class _EditShopDetailsPopUpWidgetState
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.services = (currentUserDocument?.shopServices?.toList() ?? [])
+      _model.services = (currentUserDocument?.shopServices.toList() ?? [])
           .toList()
           .cast<String>();
       _model.openingHour = currentUserDocument?.shopOpeningHour;
       _model.closingHour = currentUserDocument?.shopClosingHour;
       _model.servicePrices =
-          (currentUserDocument?.shopServicesPrices?.toList() ?? [])
+          (currentUserDocument?.shopServicesPrices.toList() ?? [])
               .toList()
               .cast<int>();
       safeSetState(() {});
@@ -476,14 +472,8 @@ class _EditShopDetailsPopUpWidgetState
                                       onPressed: () async {
                                         if ((_model.serviceToAddTextController
                                                         .text !=
-                                                    null &&
-                                                _model.serviceToAddTextController
-                                                        .text !=
                                                     '') &&
                                             (_model.servicePriceToAddTextController
-                                                        .text !=
-                                                    null &&
-                                                _model.servicePriceToAddTextController
                                                         .text !=
                                                     '')) {
                                           if (!_model.services.contains(_model
@@ -882,41 +872,55 @@ class _EditShopDetailsPopUpWidgetState
                               0.0, 0.0, 0.0, 15.0),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              if (_model.formKey.currentState == null ||
-                                  !_model.formKey.currentState!.validate()) {
-                                return;
-                              }
-
-                              await currentUserReference!.update({
-                                ...createUsersRecordData(
-                                  shopTowingAvailability:
-                                      _model.towAvailabilityValue,
-                                  shopOpeningHour: _model.datePicked1,
-                                  shopClosingHour: _model.datePicked2,
-                                ),
-                                ...mapToFirestore(
-                                  {
-                                    'shop_services': _model.services,
-                                    'shop_services_prices':
-                                        _model.servicePrices,
-                                  },
-                                ),
-                              });
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    'Shop details saved successfully.',
-                                    style: TextStyle(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                    ),
+                              if (_model.services.length > 1) {
+                                await currentUserReference!.update({
+                                  ...createUsersRecordData(
+                                    shopTowingAvailability:
+                                        _model.towAvailabilityValue,
+                                    shopOpeningHour: _model.datePicked1,
+                                    shopClosingHour: _model.datePicked2,
                                   ),
-                                  duration: Duration(milliseconds: 3000),
-                                  backgroundColor:
-                                      FlutterFlowTheme.of(context).secondary,
-                                ),
-                              );
-                              Navigator.pop(context);
+                                  ...mapToFirestore(
+                                    {
+                                      'shop_services': _model.services,
+                                      'shop_services_prices':
+                                          _model.servicePrices,
+                                    },
+                                  ),
+                                });
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Shop details saved successfully.',
+                                      style: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                      ),
+                                    ),
+                                    duration: Duration(milliseconds: 3000),
+                                    backgroundColor:
+                                        FlutterFlowTheme.of(context)
+                                            .blackButton,
+                                  ),
+                                );
+                                Navigator.pop(context);
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Services must have at least two items.',
+                                      style: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                      ),
+                                    ),
+                                    duration: Duration(milliseconds: 4000),
+                                    backgroundColor:
+                                        FlutterFlowTheme.of(context)
+                                            .blackButton,
+                                  ),
+                                );
+                              }
                             },
                             text: 'Save',
                             options: FFButtonOptions(

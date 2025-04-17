@@ -8,12 +8,8 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/rider_pages/rider_appt_popup/rider_appt_popup_widget.dart';
 import '/pages/rider_pages/to_pay_pop_up/to_pay_pop_up_widget.dart';
-import 'dart:ui';
 import '/index.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'rider_appointment_page_model.dart';
 export 'rider_appointment_page_model.dart';
 
@@ -109,7 +105,7 @@ class _RiderAppointmentPageWidgetState
                     builder: (context) => Builder(
                       builder: (context) {
                         final appointments =
-                            (currentUserDocument?.userAppointments?.toList() ??
+                            (currentUserDocument?.userAppointments.toList() ??
                                     [])
                                 .toList();
 
@@ -182,7 +178,7 @@ class _RiderAppointmentPageWidgetState
                                                           ?.unfocus();
                                                     },
                                                     child: Container(
-                                                      height: 510.0,
+                                                      height: 600.0,
                                                       child:
                                                           RiderApptPopupWidget(
                                                         appointment:
@@ -354,6 +350,24 @@ class _RiderAppointmentPageWidgetState
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w600,
+                                                                ),
+                                                          ),
+                                                          Text(
+                                                            'Tap to see more details...',
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Poppins',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primary,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .normal,
                                                                 ),
                                                           ),
                                                         ].divide(SizedBox(

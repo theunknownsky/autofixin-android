@@ -4,11 +4,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'shop_chat_with_rider_page_model.dart';
 export 'shop_chat_with_rider_page_model.dart';
 
@@ -108,7 +104,7 @@ class _ShopChatWithRiderPageWidgetState
                                   queryBuilder: (usersRecord) =>
                                       usersRecord.where(
                                     'uid',
-                                    isEqualTo: widget!.chat?.riderReference?.id,
+                                    isEqualTo: widget.chat?.riderReference?.id,
                                   ),
                                   singleRecord: true,
                                 ),
@@ -171,7 +167,7 @@ class _ShopChatWithRiderPageWidgetState
                           queryBuilder: (messagesRecord) => messagesRecord
                               .where(
                                 'chat',
-                                isEqualTo: widget!.chat?.reference,
+                                isEqualTo: widget.chat?.reference,
                               )
                               .orderBy('timestamp'),
                         ),
@@ -457,7 +453,7 @@ class _ShopChatWithRiderPageWidgetState
                             onPressed: () async {
                               await MessagesRecord.collection.doc().set({
                                 ...createMessagesRecordData(
-                                  chat: widget!.chat?.reference,
+                                  chat: widget.chat?.reference,
                                   sender: currentUserReference,
                                   text: _model.chatBoxTextController.text,
                                 ),
@@ -468,11 +464,11 @@ class _ShopChatWithRiderPageWidgetState
                                 ),
                               });
 
-                              await widget!.chat!.reference.update({
+                              await widget.chat!.reference.update({
                                 ...createChatsRecordData(
                                   lastMessage:
                                       _model.chatBoxTextController.text,
-                                  users: widget!.chat?.users,
+                                  users: widget.chat?.users,
                                 ),
                                 ...mapToFirestore(
                                   {

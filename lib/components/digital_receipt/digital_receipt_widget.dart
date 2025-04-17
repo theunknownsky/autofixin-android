@@ -1,12 +1,9 @@
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:ui';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'digital_receipt_model.dart';
 export 'digital_receipt_model.dart';
 
@@ -39,8 +36,8 @@ class _DigitalReceiptWidgetState extends State<DigitalReceiptWidget> {
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.serviceWithFee = await actions.getShopServicesWithPrices(
-        widget!.transactionDoc!.transactionServices.toList(),
-        widget!.transactionDoc!.transactionServicesFees.toList(),
+        widget.transactionDoc!.transactionServices.toList(),
+        widget.transactionDoc!.transactionServicesFees.toList(),
       );
       _model.servicesWithFees = _model.serviceWithFee!.toList().cast<String>();
       safeSetState(() {});
@@ -125,7 +122,7 @@ class _DigitalReceiptWidgetState extends State<DigitalReceiptWidget> {
                             EdgeInsetsDirectional.fromSTEB(0.0, 32.0, 0.0, 0.0),
                         child: Text(
                           formatNumber(
-                            widget!.transactionDoc!.transactionServiceFee,
+                            widget.transactionDoc!.transactionServiceFee,
                             formatType: FormatType.custom,
                             format: 'Php 0.00',
                             locale: '',
@@ -143,7 +140,7 @@ class _DigitalReceiptWidgetState extends State<DigitalReceiptWidget> {
                             EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                         child: Text(
                           dateTimeFormat("M/d h:mm a",
-                              widget!.transactionDoc!.transactionTimestamp!),
+                              widget.transactionDoc!.transactionTimestamp!),
                           style:
                               FlutterFlowTheme.of(context).titleLarge.override(
                                     fontFamily: 'Poppins',
@@ -156,7 +153,7 @@ class _DigitalReceiptWidgetState extends State<DigitalReceiptWidget> {
                             EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
                         child: StreamBuilder<UsersRecord>(
                           stream: UsersRecord.getDocument(
-                              widget!.transactionDoc!.transactionRider!),
+                              widget.transactionDoc!.transactionRider!),
                           builder: (context, snapshot) {
                             // Customize what your widget looks like when it's loading.
                             if (!snapshot.hasData) {
@@ -223,7 +220,7 @@ class _DigitalReceiptWidgetState extends State<DigitalReceiptWidget> {
                             EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                         child: StreamBuilder<UsersRecord>(
                           stream: UsersRecord.getDocument(
-                              widget!.transactionDoc!.transactionShop!),
+                              widget.transactionDoc!.transactionShop!),
                           builder: (context, snapshot) {
                             // Customize what your widget looks like when it's loading.
                             if (!snapshot.hasData) {
@@ -287,8 +284,39 @@ class _DigitalReceiptWidgetState extends State<DigitalReceiptWidget> {
                             ),
                             Text(
                               valueOrDefault<String>(
-                                widget!.transactionDoc?.transactionMode,
+                                widget.transactionDoc?.transactionMode,
                                 'Cash',
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    letterSpacing: 0.0,
+                                  ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Mechanic Sent',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    letterSpacing: 0.0,
+                                  ),
+                            ),
+                            Text(
+                              valueOrDefault<String>(
+                                widget.transactionDoc?.transactionMechanic,
+                                'Fetching mechanic...',
                               ),
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
@@ -361,7 +389,7 @@ class _DigitalReceiptWidgetState extends State<DigitalReceiptWidget> {
                       ),
                       Text(
                         valueOrDefault<String>(
-                          widget!.transactionDoc?.reference.id,
+                          widget.transactionDoc?.reference.id,
                           'Fetching Reference ID...',
                         ),
                         style: FlutterFlowTheme.of(context).bodyLarge.override(

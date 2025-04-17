@@ -3,12 +3,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'chat_page_model.dart';
 export 'chat_page_model.dart';
 
@@ -151,7 +146,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                         queryBuilder: (messagesRecord) => messagesRecord
                             .where(
                               'chat',
-                              isEqualTo: widget!.chats,
+                              isEqualTo: widget.chats,
                             )
                             .orderBy('timestamp'),
                       ),
@@ -330,7 +325,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                 onTap: () async {
                                   await MessagesRecord.collection.doc().set({
                                     ...createMessagesRecordData(
-                                      chat: widget!.chats,
+                                      chat: widget.chats,
                                       sender: currentUserReference,
                                       text: _model.textController.text,
                                     ),
@@ -342,7 +337,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                     ),
                                   });
 
-                                  await widget!.chats!.update({
+                                  await widget.chats!.update({
                                     ...createChatsRecordData(
                                       lastMessage: _model.textController.text,
                                     ),

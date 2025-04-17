@@ -3,12 +3,8 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'rider_review_model.dart';
 export 'rider_review_model.dart';
 
@@ -208,13 +204,12 @@ class _RiderReviewWidgetState extends State<RiderReviewWidget> {
                           ),
                           FFButtonWidget(
                             onPressed: () async {
-                              if (_model.textController.text != null &&
-                                  _model.textController.text != '') {
+                              if (_model.textController.text != '') {
                                 var reviewsRecordReference1 =
                                     ReviewsRecord.collection.doc();
                                 await reviewsRecordReference1
                                     .set(createReviewsRecordData(
-                                  shop: widget!.shop,
+                                  shop: widget.shop,
                                   rider: currentUserReference,
                                   rating: _model.rating,
                                   comment: _model.textController.text,
@@ -222,14 +217,14 @@ class _RiderReviewWidgetState extends State<RiderReviewWidget> {
                                 _model.reviewCreated =
                                     ReviewsRecord.getDocumentFromData(
                                         createReviewsRecordData(
-                                          shop: widget!.shop,
+                                          shop: widget.shop,
                                           rider: currentUserReference,
                                           rating: _model.rating,
                                           comment: _model.textController.text,
                                         ),
                                         reviewsRecordReference1);
 
-                                await widget!.shop!.update({
+                                await widget.shop!.update({
                                   ...mapToFirestore(
                                     {
                                       'shop_reviews': FieldValue.arrayUnion(
@@ -245,7 +240,7 @@ class _RiderReviewWidgetState extends State<RiderReviewWidget> {
                                     ReviewsRecord.collection.doc();
                                 await reviewsRecordReference2
                                     .set(createReviewsRecordData(
-                                  shop: widget!.shop,
+                                  shop: widget.shop,
                                   rider: currentUserReference,
                                   rating: _model.rating,
                                   comment: 'No comment.',
@@ -253,14 +248,14 @@ class _RiderReviewWidgetState extends State<RiderReviewWidget> {
                                 _model.reviewCreated1 =
                                     ReviewsRecord.getDocumentFromData(
                                         createReviewsRecordData(
-                                          shop: widget!.shop,
+                                          shop: widget.shop,
                                           rider: currentUserReference,
                                           rating: _model.rating,
                                           comment: 'No comment.',
                                         ),
                                         reviewsRecordReference2);
 
-                                await widget!.shop!.update({
+                                await widget.shop!.update({
                                   ...mapToFirestore(
                                     {
                                       'shop_reviews': FieldValue.arrayUnion(

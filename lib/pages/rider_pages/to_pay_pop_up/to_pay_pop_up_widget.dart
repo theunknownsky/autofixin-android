@@ -1,14 +1,9 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import '/index.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'to_pay_pop_up_model.dart';
 export 'to_pay_pop_up_model.dart';
 
@@ -130,7 +125,7 @@ class _ToPayPopUpWidgetState extends State<ToPayPopUpWidget> {
                             Align(
                               alignment: AlignmentDirectional(-1.0, 0.0),
                               child: Text(
-                                'Php ${widget!.appointment?.appointmentServiceFee?.toString()}',
+                                'Php ${widget.appointment?.appointmentServiceFee.toString()}',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -147,7 +142,7 @@ class _ToPayPopUpWidgetState extends State<ToPayPopUpWidget> {
                           children: [
                             FFButtonWidget(
                               onPressed: () async {
-                                await widget!.appointment!.reference
+                                await widget.appointment!.reference
                                     .update(createAppointmentsRecordData(
                                   appointmentTransactionMode: 'Cash',
                                 ));
@@ -175,10 +170,10 @@ class _ToPayPopUpWidgetState extends State<ToPayPopUpWidget> {
                               ),
                             ),
                             FFButtonWidget(
-                              onPressed: (widget!.shopDetails
+                              onPressed: (widget.shopDetails
                                                   ?.shopContactNumber ==
                                               null ||
-                                          widget!.shopDetails
+                                          widget.shopDetails
                                                   ?.shopContactNumber ==
                                               ''
                                       ? true
@@ -189,17 +184,17 @@ class _ToPayPopUpWidgetState extends State<ToPayPopUpWidget> {
                                         GcashPaymentPageWidget.routeName,
                                         queryParameters: {
                                           'appointment': serializeParam(
-                                            widget!.appointment,
+                                            widget.appointment,
                                             ParamType.Document,
                                           ),
                                           'shopDetails': serializeParam(
-                                            widget!.shopDetails,
+                                            widget.shopDetails,
                                             ParamType.Document,
                                           ),
                                         }.withoutNulls,
                                         extra: <String, dynamic>{
-                                          'appointment': widget!.appointment,
-                                          'shopDetails': widget!.shopDetails,
+                                          'appointment': widget.appointment,
+                                          'shopDetails': widget.shopDetails,
                                         },
                                       );
                                     },

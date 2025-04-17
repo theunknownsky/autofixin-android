@@ -5,15 +5,12 @@ import '/components/shop_bottom_navbar/shop_bottom_navbar_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/pages/auto_shop_pages/select_mechanic_pop_up/select_mechanic_pop_up_widget.dart';
 import '/pages/auto_shop_pages/service_fee_pop_up/service_fee_pop_up_widget.dart';
 import '/pages/auto_shop_pages/shop_appt_popup/shop_appt_popup_widget.dart';
-import 'dart:ui';
 import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'shop_appointment_page_model.dart';
 export 'shop_appointment_page_model.dart';
 
@@ -85,7 +82,7 @@ class _ShopAppointmentPageWidgetState extends State<ShopAppointmentPageWidget> {
                     builder: (context) => Builder(
                       builder: (context) {
                         final appointments =
-                            (currentUserDocument?.userAppointments?.toList() ??
+                            (currentUserDocument?.userAppointments.toList() ??
                                     [])
                                 .toList();
 
@@ -158,7 +155,7 @@ class _ShopAppointmentPageWidgetState extends State<ShopAppointmentPageWidget> {
                                                           ?.unfocus();
                                                     },
                                                     child: Container(
-                                                      height: 560.0,
+                                                      height: 650.0,
                                                       child:
                                                           ShopApptPopupWidget(
                                                         appointment:
@@ -337,6 +334,25 @@ class _ShopAppointmentPageWidgetState extends State<ShopAppointmentPageWidget> {
                                                                           .w600,
                                                                 ),
                                                       ),
+                                                      Text(
+                                                        'Tap to see more details...',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Poppins',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primary,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .normal,
+                                                                ),
+                                                      ),
                                                     ].divide(
                                                         SizedBox(height: 3.0)),
                                                   ),
@@ -358,23 +374,30 @@ class _ShopAppointmentPageWidgetState extends State<ShopAppointmentPageWidget> {
                                                                     : () async {
                                                                         if (containerAppointmentsRecord.appointmentStatus ==
                                                                             1) {
-                                                                          await appointmentsItem
-                                                                              .update(createAppointmentsRecordData(
-                                                                            appointmentStatus:
-                                                                                2,
-                                                                          ));
-                                                                          ScaffoldMessenger.of(context)
-                                                                              .showSnackBar(
-                                                                            SnackBar(
-                                                                              content: Text(
-                                                                                'Appointment accepted.',
-                                                                                style: TextStyle(
-                                                                                  color: FlutterFlowTheme.of(context).primaryText,
+                                                                          await showDialog(
+                                                                            context:
+                                                                                context,
+                                                                            builder:
+                                                                                (dialogContext) {
+                                                                              return Dialog(
+                                                                                elevation: 0,
+                                                                                insetPadding: EdgeInsets.zero,
+                                                                                backgroundColor: Colors.transparent,
+                                                                                alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                child: GestureDetector(
+                                                                                  onTap: () {
+                                                                                    FocusScope.of(dialogContext).unfocus();
+                                                                                    FocusManager.instance.primaryFocus?.unfocus();
+                                                                                  },
+                                                                                  child: Container(
+                                                                                    height: 370.0,
+                                                                                    child: SelectMechanicPopUpWidget(
+                                                                                      appointment: containerAppointmentsRecord,
+                                                                                    ),
+                                                                                  ),
                                                                                 ),
-                                                                              ),
-                                                                              duration: Duration(milliseconds: 4000),
-                                                                              backgroundColor: FlutterFlowTheme.of(context).secondary,
-                                                                            ),
+                                                                              );
+                                                                            },
                                                                           );
                                                                         } else if (containerAppointmentsRecord.appointmentStatus ==
                                                                             3) {
@@ -420,6 +443,7 @@ class _ShopAppointmentPageWidgetState extends State<ShopAppointmentPageWidget> {
                                                                               transactionTimestamp: getCurrentTimestamp,
                                                                               transactionRider: containerAppointmentsRecord.appointmentRider,
                                                                               transactionMode: containerAppointmentsRecord.appointmentTransactionMode,
+                                                                              transactionMechanic: containerAppointmentsRecord.appointmentMechanic,
                                                                             ),
                                                                             ...mapToFirestore(
                                                                               {
@@ -437,6 +461,7 @@ class _ShopAppointmentPageWidgetState extends State<ShopAppointmentPageWidget> {
                                                                               transactionTimestamp: getCurrentTimestamp,
                                                                               transactionRider: containerAppointmentsRecord.appointmentRider,
                                                                               transactionMode: containerAppointmentsRecord.appointmentTransactionMode,
+                                                                              transactionMechanic: containerAppointmentsRecord.appointmentMechanic,
                                                                             ),
                                                                             ...mapToFirestore(
                                                                               {

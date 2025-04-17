@@ -1,11 +1,8 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:ui';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'shop_bottom_navbar_model.dart';
 export 'shop_bottom_navbar_model.dart';
 
@@ -37,25 +34,25 @@ class _ShopBottomNavbarWidgetState extends State<ShopBottomNavbarWidget> {
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (widget!.currentActiveNav == 1) {
+      if (widget.currentActiveNav == 1) {
         _model.dashboardColor = FlutterFlowTheme.of(context).primary;
         _model.appointmentColor = FlutterFlowTheme.of(context).secondaryText;
         _model.chatColor = FlutterFlowTheme.of(context).secondaryText;
         _model.accountColor = FlutterFlowTheme.of(context).secondaryText;
         safeSetState(() {});
-      } else if (widget!.currentActiveNav == 2) {
+      } else if (widget.currentActiveNav == 2) {
         _model.dashboardColor = FlutterFlowTheme.of(context).secondaryText;
         _model.appointmentColor = FlutterFlowTheme.of(context).primary;
         _model.chatColor = FlutterFlowTheme.of(context).secondaryText;
         _model.accountColor = FlutterFlowTheme.of(context).secondaryText;
         safeSetState(() {});
-      } else if (widget!.currentActiveNav == 3) {
+      } else if (widget.currentActiveNav == 3) {
         _model.dashboardColor = FlutterFlowTheme.of(context).secondaryText;
         _model.appointmentColor = FlutterFlowTheme.of(context).secondaryText;
         _model.chatColor = FlutterFlowTheme.of(context).primary;
         _model.accountColor = FlutterFlowTheme.of(context).secondaryText;
         safeSetState(() {});
-      } else if (widget!.currentActiveNav == 4) {
+      } else if (widget.currentActiveNav == 4) {
         _model.dashboardColor = FlutterFlowTheme.of(context).secondaryText;
         _model.appointmentColor = FlutterFlowTheme.of(context).secondaryText;
         _model.chatColor = FlutterFlowTheme.of(context).secondaryText;

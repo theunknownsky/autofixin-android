@@ -3,15 +3,12 @@ import '/components/edit_password_pop_up/edit_password_pop_up_widget.dart';
 import '/components/shop_bottom_navbar/shop_bottom_navbar_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
+import '/pages/auto_shop_pages/edit_mechanics_pop_up/edit_mechanics_pop_up_widget.dart';
 import '/pages/auto_shop_pages/edit_shop_details_pop_up/edit_shop_details_pop_up_widget.dart';
-import 'dart:ui';
 import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'shop_account_page_model.dart';
 export 'shop_account_page_model.dart';
 
@@ -38,8 +35,8 @@ class _ShopAccountPageWidgetState extends State<ShopAccountPageWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.serviceAndPrice = await actions.getShopServicesWithPrices(
-        (currentUserDocument?.shopServices?.toList() ?? []).toList(),
-        (currentUserDocument?.shopServicesPrices?.toList() ?? []).toList(),
+        (currentUserDocument?.shopServices.toList() ?? []).toList(),
+        (currentUserDocument?.shopServicesPrices.toList() ?? []).toList(),
       );
       _model.shopServicesWithPrices =
           _model.serviceAndPrice!.toList().cast<String>();
@@ -385,37 +382,120 @@ class _ShopAccountPageWidgetState extends State<ShopAccountPageWidget> {
                                     ],
                                   ),
                                 ),
-                                Divider(
-                                  thickness: 2.0,
-                                  color: FlutterFlowTheme.of(context).primary,
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 16.0, 0.0, 16.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'Number',
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Card(
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        color: FlutterFlowTheme.of(context).lightGreenBGColor,
+                        elevation: 0.0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              16.0, 24.0, 16.0, 24.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Align(
+                                    alignment: AlignmentDirectional(-1.0, 0.0),
+                                    child: Text(
+                                      'Mechanics',
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleLarge
+                                          .override(
+                                            fontFamily: 'Poppins',
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                  ),
+                                  Builder(
+                                    builder: (context) => InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (dialogContext) {
+                                            return Dialog(
+                                              elevation: 0,
+                                              insetPadding: EdgeInsets.zero,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              alignment:
+                                                  AlignmentDirectional(0.0, 0.0)
+                                                      .resolve(
+                                                          Directionality.of(
+                                                              context)),
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  FocusScope.of(dialogContext)
+                                                      .unfocus();
+                                                  FocusManager
+                                                      .instance.primaryFocus
+                                                      ?.unfocus();
+                                                },
+                                                child: Container(
+                                                  height: 430.0,
+                                                  child:
+                                                      EditMechanicsPopUpWidget(),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        );
+                                      },
+                                      child: Text(
+                                        'Edit',
                                         style: FlutterFlowTheme.of(context)
-                                            .titleSmall
+                                            .titleLarge
                                             .override(
                                               fontFamily: 'Poppins',
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              fontSize: 18.0,
+                                                      .primary,
                                               letterSpacing: 0.0,
                                             ),
                                       ),
-                                      AuthUserStreamWidget(
-                                        builder: (context) => Text(
-                                          valueOrDefault(
-                                              currentUserDocument
-                                                  ?.shopContactNumber,
-                                              ''),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Divider(
+                                thickness: 2.0,
+                                color: FlutterFlowTheme.of(context).primary,
+                              ),
+                              AuthUserStreamWidget(
+                                builder: (context) => Builder(
+                                  builder: (context) {
+                                    final mechanicList = (currentUserDocument
+                                                ?.shopMechanics
+                                                .toList() ??
+                                            [])
+                                        .toList();
+
+                                    return Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children:
+                                          List.generate(mechanicList.length,
+                                              (mechanicListIndex) {
+                                        final mechanicListItem =
+                                            mechanicList[mechanicListIndex];
+                                        return Text(
+                                          mechanicListItem,
                                           style: FlutterFlowTheme.of(context)
                                               .titleMedium
                                               .override(
@@ -425,13 +505,13 @@ class _ShopAccountPageWidgetState extends State<ShopAccountPageWidget> {
                                                         .primary,
                                                 letterSpacing: 0.0,
                                               ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                        );
+                                      }),
+                                    );
+                                  },
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -559,6 +639,50 @@ class _ShopAccountPageWidgetState extends State<ShopAccountPageWidget> {
                                                 .primary,
                                             letterSpacing: 0.0,
                                           ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Divider(
+                                thickness: 2.0,
+                                color: FlutterFlowTheme.of(context).primary,
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 16.0, 0.0, 16.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Number',
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .override(
+                                            fontFamily: 'Poppins',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            fontSize: 18.0,
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                    AuthUserStreamWidget(
+                                      builder: (context) => Text(
+                                        valueOrDefault(
+                                            currentUserDocument
+                                                ?.shopContactNumber,
+                                            ''),
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleMedium
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
                                     ),
                                   ],
                                 ),

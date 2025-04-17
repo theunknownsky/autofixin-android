@@ -2,12 +2,9 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import '/index.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'rider_signup_pword_page_model.dart';
 export 'rider_signup_pword_page_model.dart';
 
@@ -396,23 +393,23 @@ class _RiderSignupPwordPageWidgetState
                               RiderSignupVerificationPageWidget.routeName,
                               queryParameters: {
                                 'firstName': serializeParam(
-                                  widget!.firstName,
+                                  widget.firstName,
                                   ParamType.String,
                                 ),
                                 'lastName': serializeParam(
-                                  widget!.lastName,
+                                  widget.lastName,
                                   ParamType.String,
                                 ),
                                 'email': serializeParam(
-                                  widget!.email,
+                                  widget.email,
                                   ParamType.String,
                                 ),
                                 'mobileNumber': serializeParam(
-                                  widget!.mobileNumber,
+                                  widget.mobileNumber,
                                   ParamType.String,
                                 ),
                                 'driverLicenseId': serializeParam(
-                                  widget!.driverLicenseID,
+                                  widget.driverLicenseID,
                                   ParamType.String,
                                 ),
                                 'password': serializeParam(

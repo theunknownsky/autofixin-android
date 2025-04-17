@@ -1,12 +1,9 @@
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:ui';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'shop_appt_popup_model.dart';
 export 'shop_appt_popup_model.dart';
 
@@ -39,8 +36,8 @@ class _ShopApptPopupWidgetState extends State<ShopApptPopupWidget> {
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.serviceWithFees = await actions.getShopServicesWithPrices(
-        widget!.appointment!.appointmentServices.toList(),
-        widget!.appointment!.appointmentServicesFeesList.toList(),
+        widget.appointment!.appointmentServices.toList(),
+        widget.appointment!.appointmentServicesFeesList.toList(),
       );
       _model.servicesWithPrice =
           _model.serviceWithFees!.toList().cast<String>();
@@ -101,7 +98,7 @@ class _ShopApptPopupWidgetState extends State<ShopApptPopupWidget> {
               padding: EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 12.0),
               child: StreamBuilder<VehiclesRecord>(
                 stream: VehiclesRecord.getDocument(
-                    widget!.appointment!.appointmentVehicle!),
+                    widget.appointment!.appointmentVehicle!),
                 builder: (context, snapshot) {
                   // Customize what your widget looks like when it's loading.
                   if (!snapshot.hasData) {
@@ -137,7 +134,7 @@ class _ShopApptPopupWidgetState extends State<ShopApptPopupWidget> {
                           ),
                           StreamBuilder<UsersRecord>(
                             stream: UsersRecord.getDocument(
-                                widget!.appointment!.appointmentRider!),
+                                widget.appointment!.appointmentRider!),
                             builder: (context, snapshot) {
                               // Customize what your widget looks like when it's loading.
                               if (!snapshot.hasData) {
@@ -336,6 +333,33 @@ class _ShopApptPopupWidgetState extends State<ShopApptPopupWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
+                    'Mechanic: ',
+                    style: FlutterFlowTheme.of(context).bodyLarge.override(
+                          fontFamily: 'Poppins',
+                          letterSpacing: 0.0,
+                        ),
+                  ),
+                  Text(
+                    valueOrDefault<String>(
+                      widget.appointment?.appointmentMechanic,
+                      'Fetching mechanic...',
+                    ),
+                    style: FlutterFlowTheme.of(context).bodyLarge.override(
+                          fontFamily: 'Poppins',
+                          letterSpacing: 0.0,
+                        ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(24.0, 12.0, 24.0, 0.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
                     'Service Availed:',
                     style: FlutterFlowTheme.of(context).bodyLarge.override(
                           fontFamily: 'Poppins',
@@ -402,7 +426,7 @@ class _ShopApptPopupWidgetState extends State<ShopApptPopupWidget> {
                 children: [
                   Text(
                     valueOrDefault<String>(
-                      widget!.appointment?.appointmentMessage,
+                      widget.appointment?.appointmentMessage,
                       '---',
                     ),
                     textAlign: TextAlign.justify,

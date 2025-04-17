@@ -8,15 +8,11 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import 'dart:ui';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/permissions_util.dart';
 import '/index.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'rider_appointment_sheet2_model.dart';
 export 'rider_appointment_sheet2_model.dart';
 
@@ -57,11 +53,11 @@ class _RiderAppointmentSheet2WidgetState
       currentUserLocationValue =
           await getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0));
       _model.servicesWithPricesAction = await actions.getShopServicesWithPrices(
-        widget!.shop!.shopServices.toList(),
-        widget!.shop!.shopServicesPrices.toList(),
+        widget.shop!.shopServices.toList(),
+        widget.shop!.shopServicesPrices.toList(),
       );
       _model.servicesIndexesAction = await actions.getServiceIndex(
-        widget!.shop!.shopServices.toList(),
+        widget.shop!.shopServices.toList(),
       );
       _model.servicesWithPrices =
           _model.servicesWithPricesAction!.toList().cast<String>();
@@ -72,7 +68,7 @@ class _RiderAppointmentSheet2WidgetState
 
     _model.vehicleDisplayTextController ??= TextEditingController(
         text:
-            '${widget!.vehicle?.vehicleManufacturer} ${widget!.vehicle?.vehicleModel} ${widget!.vehicle?.vehicleYear?.toString()}');
+            '${widget.vehicle?.vehicleManufacturer} ${widget.vehicle?.vehicleModel} ${widget.vehicle?.vehicleYear.toString()}');
     _model.vehicleDisplayFocusNode ??= FocusNode();
 
     _model.problemFieldTextController ??= TextEditingController();
@@ -564,19 +560,19 @@ class _RiderAppointmentSheet2WidgetState
                                         ...createAppointmentsRecordData(
                                           appointmentStatus: 1,
                                           appointmentVehicle:
-                                              widget!.vehicle?.reference,
+                                              widget.vehicle?.reference,
                                           appointmentRider:
                                               currentUserReference,
-                                          appointmentShop: widget!.shopId,
+                                          appointmentShop: widget.shopId,
                                           appointmentMessage: _model
                                               .problemFieldTextController.text,
-                                          appointmentServiceFee: widget!
+                                          appointmentServiceFee: widget
                                               .shop?.shopServicesPrices
-                                              ?.elementAtOrNull(
+                                              .elementAtOrNull(
                                                   _model.serviceDropdownValue!),
-                                          appointmentServiceAvailed: widget!
+                                          appointmentServiceAvailed: widget
                                               .shop?.shopServices
-                                              ?.elementAtOrNull(
+                                              .elementAtOrNull(
                                                   _model.serviceDropdownValue!),
                                           appointmentLocation:
                                               _model.currentLocation,
@@ -585,13 +581,13 @@ class _RiderAppointmentSheet2WidgetState
                                         ...mapToFirestore(
                                           {
                                             'appointment_services': [
-                                              widget!.shop?.shopServices
-                                                  ?.elementAtOrNull(_model
+                                              widget.shop?.shopServices
+                                                  .elementAtOrNull(_model
                                                       .serviceDropdownValue!)
                                             ],
                                             'appointment_services_fees_list': [
-                                              widget!.shop?.shopServicesPrices
-                                                  ?.elementAtOrNull(_model
+                                              widget.shop?.shopServicesPrices
+                                                  .elementAtOrNull(_model
                                                       .serviceDropdownValue!)
                                             ],
                                           },
@@ -602,19 +598,19 @@ class _RiderAppointmentSheet2WidgetState
                                         ...createAppointmentsRecordData(
                                           appointmentStatus: 1,
                                           appointmentVehicle:
-                                              widget!.vehicle?.reference,
+                                              widget.vehicle?.reference,
                                           appointmentRider:
                                               currentUserReference,
-                                          appointmentShop: widget!.shopId,
+                                          appointmentShop: widget.shopId,
                                           appointmentMessage: _model
                                               .problemFieldTextController.text,
-                                          appointmentServiceFee: widget!
+                                          appointmentServiceFee: widget
                                               .shop?.shopServicesPrices
-                                              ?.elementAtOrNull(
+                                              .elementAtOrNull(
                                                   _model.serviceDropdownValue!),
-                                          appointmentServiceAvailed: widget!
+                                          appointmentServiceAvailed: widget
                                               .shop?.shopServices
-                                              ?.elementAtOrNull(
+                                              .elementAtOrNull(
                                                   _model.serviceDropdownValue!),
                                           appointmentLocation:
                                               _model.currentLocation,
@@ -623,20 +619,20 @@ class _RiderAppointmentSheet2WidgetState
                                         ...mapToFirestore(
                                           {
                                             'appointment_services': [
-                                              widget!.shop?.shopServices
-                                                  ?.elementAtOrNull(_model
+                                              widget.shop?.shopServices
+                                                  .elementAtOrNull(_model
                                                       .serviceDropdownValue!)
                                             ],
                                             'appointment_services_fees_list': [
-                                              widget!.shop?.shopServicesPrices
-                                                  ?.elementAtOrNull(_model
+                                              widget.shop?.shopServicesPrices
+                                                  .elementAtOrNull(_model
                                                       .serviceDropdownValue!)
                                             ],
                                           },
                                         ),
                                       }, appointmentsRecordReference);
 
-                                      await widget!.shopId!.update({
+                                      await widget.shopId!.update({
                                         ...mapToFirestore(
                                           {
                                             'user_appointments':

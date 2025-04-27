@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'shop_bottom_navbar_model.dart';
 export 'shop_bottom_navbar_model.dart';
 
@@ -124,9 +125,21 @@ class _ShopBottomNavbarWidgetState extends State<ShopBottomNavbarWidget> {
                   Text(
                     'Dashboard',
                     style: FlutterFlowTheme.of(context).labelSmall.override(
-                          fontFamily: 'Poppins',
+                          font: GoogleFonts.poppins(
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .labelSmall
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .labelSmall
+                                .fontStyle,
+                          ),
                           color: _model.dashboardColor,
                           letterSpacing: 0.0,
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .labelSmall
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).labelSmall.fontStyle,
                         ),
                   ),
                 ].divide(SizedBox(height: 4.0)),
@@ -165,9 +178,21 @@ class _ShopBottomNavbarWidgetState extends State<ShopBottomNavbarWidget> {
                   Text(
                     'Appointment',
                     style: FlutterFlowTheme.of(context).labelSmall.override(
-                          fontFamily: 'Poppins',
+                          font: GoogleFonts.poppins(
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .labelSmall
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .labelSmall
+                                .fontStyle,
+                          ),
                           color: _model.appointmentColor,
                           letterSpacing: 0.0,
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .labelSmall
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).labelSmall.fontStyle,
                         ),
                   ),
                 ].divide(SizedBox(height: 4.0)),
@@ -207,9 +232,21 @@ class _ShopBottomNavbarWidgetState extends State<ShopBottomNavbarWidget> {
                   Text(
                     'Chat',
                     style: FlutterFlowTheme.of(context).labelSmall.override(
-                          fontFamily: 'Poppins',
+                          font: GoogleFonts.poppins(
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .labelSmall
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .labelSmall
+                                .fontStyle,
+                          ),
                           color: _model.chatColor,
                           letterSpacing: 0.0,
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .labelSmall
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).labelSmall.fontStyle,
                         ),
                   ),
                 ].divide(SizedBox(height: 4.0)),
@@ -248,9 +285,21 @@ class _ShopBottomNavbarWidgetState extends State<ShopBottomNavbarWidget> {
                   Text(
                     'Account',
                     style: FlutterFlowTheme.of(context).labelSmall.override(
-                          fontFamily: 'Poppins',
+                          font: GoogleFonts.poppins(
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .labelSmall
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .labelSmall
+                                .fontStyle,
+                          ),
                           color: _model.accountColor,
                           letterSpacing: 0.0,
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .labelSmall
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).labelSmall.fontStyle,
                         ),
                   ),
                 ].divide(SizedBox(height: 4.0)),

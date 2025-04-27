@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'sign_up_page_model.dart';
 export 'sign_up_page_model.dart';
 
@@ -85,8 +86,21 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                       'Create your\nAutoFixin account',
                       textAlign: TextAlign.center,
                       style: FlutterFlowTheme.of(context).displaySmall.override(
-                            fontFamily: 'Poppins',
+                            font: GoogleFonts.poppins(
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .displaySmall
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .displaySmall
+                                  .fontStyle,
+                            ),
                             letterSpacing: 0.0,
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .displaySmall
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .displaySmall
+                                .fontStyle,
                           ),
                     ),
                   ),
@@ -96,8 +110,21 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                     child: Text(
                       'Your Roadside Lifeline',
                       style: FlutterFlowTheme.of(context).labelLarge.override(
-                            fontFamily: 'Poppins',
+                            font: GoogleFonts.poppins(
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .labelLarge
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .labelLarge
+                                  .fontStyle,
+                            ),
                             letterSpacing: 0.0,
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .labelLarge
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .labelLarge
+                                .fontStyle,
                           ),
                     ),
                   ),
@@ -114,9 +141,20 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                     width: MediaQuery.sizeOf(context).width * 0.55,
                     height: 44.0,
                     textStyle: FlutterFlowTheme.of(context).bodyLarge.override(
-                          fontFamily: 'Poppins',
+                          font: GoogleFonts.poppins(
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .bodyLarge
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .bodyLarge
+                                .fontStyle,
+                          ),
                           color: FlutterFlowTheme.of(context).blackBGFontColor,
                           letterSpacing: 0.0,
+                          fontWeight:
+                              FlutterFlowTheme.of(context).bodyLarge.fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).bodyLarge.fontStyle,
                         ),
                     hintText: 'Rider/Owner',
                     icon: Icon(
@@ -177,10 +215,23 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                         textStyle: FlutterFlowTheme.of(context)
                             .labelLarge
                             .override(
-                              fontFamily: 'Poppins',
+                              font: GoogleFonts.poppins(
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .labelLarge
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .labelLarge
+                                    .fontStyle,
+                              ),
                               color:
                                   FlutterFlowTheme.of(context).greenBGFontColor,
                               letterSpacing: 0.0,
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .labelLarge
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .labelLarge
+                                  .fontStyle,
                             ),
                         elevation: 0.0,
                         borderRadius: BorderRadius.circular(50.0),

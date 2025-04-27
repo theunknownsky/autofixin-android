@@ -485,6 +485,21 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.Document,
             ),
           ),
+        ),
+        FFRoute(
+          name: GcashCommsPageWidget.routeName,
+          path: GcashCommsPageWidget.routePath,
+          asyncParams: {
+            'unpaidCommTransactions':
+                getDocList(['transactions'], TransactionsRecord.fromSnapshot),
+          },
+          builder: (context, params) => GcashCommsPageWidget(
+            unpaidCommTransactions: params.getParam<TransactionsRecord>(
+              'unpaidCommTransactions',
+              ParamType.Document,
+              isList: true,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

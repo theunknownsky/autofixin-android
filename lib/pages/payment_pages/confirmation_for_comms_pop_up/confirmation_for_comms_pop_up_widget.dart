@@ -1,27 +1,32 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
+import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'delete_pop_up_model.dart';
-export 'delete_pop_up_model.dart';
+import 'confirmation_for_comms_pop_up_model.dart';
+export 'confirmation_for_comms_pop_up_model.dart';
 
-class DeletePopUpWidget extends StatefulWidget {
-  const DeletePopUpWidget({
+class ConfirmationForCommsPopUpWidget extends StatefulWidget {
+  const ConfirmationForCommsPopUpWidget({
     super.key,
-    required this.vehicleToDelete,
+    required this.listOfUnpaidCommsTransactions,
   });
 
-  final DocumentReference? vehicleToDelete;
+  final List<TransactionsRecord>? listOfUnpaidCommsTransactions;
 
   @override
-  State<DeletePopUpWidget> createState() => _DeletePopUpWidgetState();
+  State<ConfirmationForCommsPopUpWidget> createState() =>
+      _ConfirmationForCommsPopUpWidgetState();
 }
 
-class _DeletePopUpWidgetState extends State<DeletePopUpWidget> {
-  late DeletePopUpModel _model;
+class _ConfirmationForCommsPopUpWidgetState
+    extends State<ConfirmationForCommsPopUpWidget> {
+  late ConfirmationForCommsPopUpModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -32,7 +37,14 @@ class _DeletePopUpWidgetState extends State<DeletePopUpWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => DeletePopUpModel());
+    _model = createModel(context, () => ConfirmationForCommsPopUpModel());
+
+    // On component load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.toPay = functions
+          .getTotalCommission(widget.listOfUnpaidCommsTransactions!.toList());
+      safeSetState(() {});
+    });
   }
 
   @override
@@ -77,7 +89,7 @@ class _DeletePopUpWidgetState extends State<DeletePopUpWidget> {
           Padding(
             padding: EdgeInsetsDirectional.fromSTEB(0.0, 60.0, 0.0, 0.0),
             child: Text(
-              'Delete Vehicle Information',
+              'You are about to pay',
               style: FlutterFlowTheme.of(context).headlineSmall.override(
                     font: GoogleFonts.poppins(
                       fontWeight:
@@ -93,24 +105,39 @@ class _DeletePopUpWidgetState extends State<DeletePopUpWidget> {
                   ),
             ),
           ),
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
-            child: Text(
-              'Are you sure you want to delete\nthis vehicle information?',
-              textAlign: TextAlign.center,
-              style: FlutterFlowTheme.of(context).bodyLarge.override(
-                    font: GoogleFonts.poppins(
-                      fontWeight:
-                          FlutterFlowTheme.of(context).bodyLarge.fontWeight,
-                      fontStyle:
-                          FlutterFlowTheme.of(context).bodyLarge.fontStyle,
-                    ),
-                    letterSpacing: 0.0,
-                    fontWeight:
-                        FlutterFlowTheme.of(context).bodyLarge.fontWeight,
+          Text(
+            '${formatNumber(
+              _model.toPay,
+              formatType: FormatType.custom,
+              currency: 'Php ',
+              format: '0.00',
+              locale: '',
+            )} to AutoFixin',
+            textAlign: TextAlign.center,
+            style: FlutterFlowTheme.of(context).bodyLarge.override(
+                  font: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w600,
                     fontStyle: FlutterFlowTheme.of(context).bodyLarge.fontStyle,
                   ),
-            ),
+                  fontSize: 25.0,
+                  letterSpacing: 0.0,
+                  fontWeight: FontWeight.w600,
+                  fontStyle: FlutterFlowTheme.of(context).bodyLarge.fontStyle,
+                ),
+          ),
+          Text(
+            '09950289659',
+            textAlign: TextAlign.center,
+            style: FlutterFlowTheme.of(context).bodyLarge.override(
+                  font: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w600,
+                    fontStyle: FlutterFlowTheme.of(context).bodyLarge.fontStyle,
+                  ),
+                  fontSize: 25.0,
+                  letterSpacing: 0.0,
+                  fontWeight: FontWeight.w600,
+                  fontStyle: FlutterFlowTheme.of(context).bodyLarge.fontStyle,
+                ),
           ),
           Padding(
             padding: EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
@@ -153,25 +180,20 @@ class _DeletePopUpWidgetState extends State<DeletePopUpWidget> {
                 ),
                 FFButtonWidget(
                   onPressed: () async {
-                    await currentUserReference!.update({
-                      ...mapToFirestore(
-                        {
-                          'rider_vehicles':
-                              FieldValue.arrayRemove([widget.vehicleToDelete]),
-                        },
-                      ),
-                    });
-                    await widget.vehicleToDelete!.delete();
-                    Navigator.pop(context);
+                    await actions.turnTransactToPaid(
+                      widget.listOfUnpaidCommsTransactions!.toList(),
+                    );
+
+                    context.pushNamed(ShopDashboardPageWidget.routeName);
                   },
-                  text: 'Yes, Delete',
+                  text: 'Confirm',
                   options: FFButtonOptions(
                     height: 40.0,
                     padding:
                         EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                     iconPadding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: Color(0xFFB50F0F),
+                    color: Color(0xFF1959E7),
                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                           font: GoogleFonts.poppins(
                             fontWeight: FlutterFlowTheme.of(context)

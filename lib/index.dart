@@ -58,3 +58,5 @@ export '/pages/auto_shop_pages/shop_route_to_rider_location/shop_route_to_rider_
 export '/chat_list/chat_list_widget.dart' show ChatListWidget;
 export '/pages/payment_pages/gcash_payment_page/gcash_payment_page_widget.dart'
     show GcashPaymentPageWidget;
+export '/pages/payment_pages/gcash_comms_page/gcash_comms_page_widget.dart'
+    show GcashCommsPageWidget;

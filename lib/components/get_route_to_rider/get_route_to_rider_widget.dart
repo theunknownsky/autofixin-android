@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'get_route_to_rider_model.dart';
 export 'get_route_to_rider_model.dart';
 
@@ -88,9 +89,18 @@ class _GetRouteToRiderWidgetState extends State<GetRouteToRiderWidget> {
                 iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                 color: FlutterFlowTheme.of(context).blackButton,
                 textStyle: FlutterFlowTheme.of(context).labelLarge.override(
-                      fontFamily: 'Poppins',
+                      font: GoogleFonts.poppins(
+                        fontWeight:
+                            FlutterFlowTheme.of(context).labelLarge.fontWeight,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).labelLarge.fontStyle,
+                      ),
                       color: FlutterFlowTheme.of(context).blackBGFontColor,
                       letterSpacing: 0.0,
+                      fontWeight:
+                          FlutterFlowTheme.of(context).labelLarge.fontWeight,
+                      fontStyle:
+                          FlutterFlowTheme.of(context).labelLarge.fontStyle,
                     ),
                 elevation: 0.0,
                 borderRadius: BorderRadius.circular(50.0),

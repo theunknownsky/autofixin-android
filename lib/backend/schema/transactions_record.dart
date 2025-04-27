@@ -66,6 +66,11 @@ class TransactionsRecord extends FirestoreRecord {
   String get transactionMechanic => _transactionMechanic ?? '';
   bool hasTransactionMechanic() => _transactionMechanic != null;
 
+  // "transaction_is_paid" field.
+  bool? _transactionIsPaid;
+  bool get transactionIsPaid => _transactionIsPaid ?? false;
+  bool hasTransactionIsPaid() => _transactionIsPaid != null;
+
   void _initializeFields() {
     _transactionId = snapshotData['transaction_id'] as String?;
     _transactionServiceAvailed =
@@ -80,6 +85,7 @@ class TransactionsRecord extends FirestoreRecord {
     _transactionServicesFees =
         getDataList(snapshotData['transaction_services_fees']);
     _transactionMechanic = snapshotData['transaction_mechanic'] as String?;
+    _transactionIsPaid = snapshotData['transaction_is_paid'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -125,6 +131,7 @@ Map<String, dynamic> createTransactionsRecordData({
   DocumentReference? transactionRider,
   String? transactionMode,
   String? transactionMechanic,
+  bool? transactionIsPaid,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -136,6 +143,7 @@ Map<String, dynamic> createTransactionsRecordData({
       'transaction_rider': transactionRider,
       'transaction_mode': transactionMode,
       'transaction_mechanic': transactionMechanic,
+      'transaction_is_paid': transactionIsPaid,
     }.withoutNulls,
   );
 
@@ -159,7 +167,8 @@ class TransactionsRecordDocumentEquality
         listEquality.equals(e1?.transactionServices, e2?.transactionServices) &&
         listEquality.equals(
             e1?.transactionServicesFees, e2?.transactionServicesFees) &&
-        e1?.transactionMechanic == e2?.transactionMechanic;
+        e1?.transactionMechanic == e2?.transactionMechanic &&
+        e1?.transactionIsPaid == e2?.transactionIsPaid;
   }
 
   @override
@@ -173,7 +182,8 @@ class TransactionsRecordDocumentEquality
         e?.transactionMode,
         e?.transactionServices,
         e?.transactionServicesFees,
-        e?.transactionMechanic
+        e?.transactionMechanic,
+        e?.transactionIsPaid
       ]);
 
   @override

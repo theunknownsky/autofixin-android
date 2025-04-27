@@ -4,6 +4,7 @@ import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'rider_bottom_navbar_model.dart';
 export 'rider_bottom_navbar_model.dart';
 
@@ -117,9 +118,21 @@ class _RiderBottomNavbarWidgetState extends State<RiderBottomNavbarWidget> {
                   Text(
                     'Map',
                     style: FlutterFlowTheme.of(context).labelSmall.override(
-                          fontFamily: 'Poppins',
+                          font: GoogleFonts.poppins(
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .labelSmall
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .labelSmall
+                                .fontStyle,
+                          ),
                           color: _model.mapColor,
                           letterSpacing: 0.0,
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .labelSmall
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).labelSmall.fontStyle,
                         ),
                   ),
                 ].divide(SizedBox(height: 4.0)),
@@ -149,9 +162,21 @@ class _RiderBottomNavbarWidgetState extends State<RiderBottomNavbarWidget> {
                   Text(
                     'Vehicle',
                     style: FlutterFlowTheme.of(context).labelSmall.override(
-                          fontFamily: 'Poppins',
+                          font: GoogleFonts.poppins(
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .labelSmall
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .labelSmall
+                                .fontStyle,
+                          ),
                           color: _model.vehicleColor,
                           letterSpacing: 0.0,
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .labelSmall
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).labelSmall.fontStyle,
                         ),
                   ),
                 ].divide(SizedBox(height: 4.0)),
@@ -181,9 +206,21 @@ class _RiderBottomNavbarWidgetState extends State<RiderBottomNavbarWidget> {
                   Text(
                     'Chat',
                     style: FlutterFlowTheme.of(context).labelSmall.override(
-                          fontFamily: 'Poppins',
+                          font: GoogleFonts.poppins(
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .labelSmall
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .labelSmall
+                                .fontStyle,
+                          ),
                           color: _model.chatColor,
                           letterSpacing: 0.0,
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .labelSmall
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).labelSmall.fontStyle,
                         ),
                   ),
                 ].divide(SizedBox(height: 4.0)),
@@ -213,9 +250,21 @@ class _RiderBottomNavbarWidgetState extends State<RiderBottomNavbarWidget> {
                   Text(
                     'Account',
                     style: FlutterFlowTheme.of(context).labelSmall.override(
-                          fontFamily: 'Poppins',
+                          font: GoogleFonts.poppins(
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .labelSmall
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .labelSmall
+                                .fontStyle,
+                          ),
                           color: _model.accountColor,
                           letterSpacing: 0.0,
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .labelSmall
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).labelSmall.fontStyle,
                         ),
                   ),
                 ].divide(SizedBox(height: 4.0)),

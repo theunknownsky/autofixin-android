@@ -1,6 +1,7 @@
 import '/backend/backend.dart';
 import '/components/shop_bottom_navbar/shop_bottom_navbar_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'shop_dashboard_page_widget.dart' show ShopDashboardPageWidget;
 import 'package:flutter/material.dart';
 

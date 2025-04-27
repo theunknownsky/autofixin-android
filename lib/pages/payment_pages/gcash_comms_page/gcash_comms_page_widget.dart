@@ -3,38 +3,37 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/pages/payment_pages/confirmation_pop_up/confirmation_pop_up_widget.dart';
+import '/pages/payment_pages/confirmation_for_comms_pop_up/confirmation_for_comms_pop_up_widget.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'gcash_payment_page_model.dart';
-export 'gcash_payment_page_model.dart';
+import 'gcash_comms_page_model.dart';
+export 'gcash_comms_page_model.dart';
 
-class GcashPaymentPageWidget extends StatefulWidget {
-  const GcashPaymentPageWidget({
+class GcashCommsPageWidget extends StatefulWidget {
+  const GcashCommsPageWidget({
     super.key,
-    required this.appointment,
-    required this.shopDetails,
+    required this.unpaidCommTransactions,
   });
 
-  final AppointmentsRecord? appointment;
-  final UsersRecord? shopDetails;
+  final List<TransactionsRecord>? unpaidCommTransactions;
 
-  static String routeName = 'GcashPaymentPage';
-  static String routePath = '/gcashPaymentPage';
+  static String routeName = 'GcashCommsPage';
+  static String routePath = '/gcashCommsPage';
 
   @override
-  State<GcashPaymentPageWidget> createState() => _GcashPaymentPageWidgetState();
+  State<GcashCommsPageWidget> createState() => _GcashCommsPageWidgetState();
 }
 
-class _GcashPaymentPageWidgetState extends State<GcashPaymentPageWidget> {
-  late GcashPaymentPageModel _model;
+class _GcashCommsPageWidgetState extends State<GcashCommsPageWidget> {
+  late GcashCommsPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => GcashPaymentPageModel());
+    _model = createModel(context, () => GcashCommsPageModel());
   }
 
   @override
@@ -115,10 +114,7 @@ class _GcashPaymentPageWidgetState extends State<GcashPaymentPageWidget> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          valueOrDefault<String>(
-                            widget.shopDetails?.shopName,
-                            'Fetching shop name...',
-                          ),
+                          'AutoFixin',
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     font: GoogleFonts.poppins(
@@ -139,10 +135,7 @@ class _GcashPaymentPageWidgetState extends State<GcashPaymentPageWidget> {
                         Align(
                           alignment: AlignmentDirectional(0.0, 0.0),
                           child: Text(
-                            valueOrDefault<String>(
-                              widget.shopDetails?.shopContactNumber,
-                              'Fetching shop number...',
-                            ),
+                            '09950289659',
                             textAlign: TextAlign.center,
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
@@ -182,168 +175,9 @@ class _GcashPaymentPageWidgetState extends State<GcashPaymentPageWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Text(
-                                        'Service availed:',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              font: GoogleFonts.poppins(
-                                                fontWeight: FontWeight.w600,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .fontStyle,
-                                              ),
-                                              letterSpacing: 0.0,
-                                              fontWeight: FontWeight.w600,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .fontStyle,
-                                            ),
-                                      ),
-                                    ].divide(SizedBox(height: 20.0)),
-                                  ),
-                                  Builder(
-                                    builder: (context) {
-                                      final servicesAvailed = widget
-                                              .appointment?.appointmentServices
-                                              .toList() ??
-                                          [];
-
-                                      return Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                        children: List.generate(
-                                            servicesAvailed.length,
-                                            (servicesAvailedIndex) {
-                                          final servicesAvailedItem =
-                                              servicesAvailed[
-                                                  servicesAvailedIndex];
-                                          return Text(
-                                            servicesAvailedItem,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  font: GoogleFonts.poppins(
-                                                    fontWeight: FontWeight.w600,
-                                                    fontStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontStyle,
-                                                  ),
-                                                  letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .fontStyle,
-                                                ),
-                                          );
-                                        }).divide(SizedBox(height: 4.0)),
-                                      );
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  24.0, 0.0, 24.0, 0.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Service Fees:',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          font: GoogleFonts.poppins(
-                                            fontWeight: FontWeight.w600,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .fontStyle,
-                                          ),
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.w600,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .fontStyle,
-                                        ),
-                                  ),
-                                  Builder(
-                                    builder: (context) {
-                                      final servicesFees = widget.appointment
-                                              ?.appointmentServicesFeesList
-                                              .toList() ??
-                                          [];
-
-                                      return Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                        children:
-                                            List.generate(servicesFees.length,
-                                                (servicesFeesIndex) {
-                                          final servicesFeesItem =
-                                              servicesFees[servicesFeesIndex];
-                                          return Text(
-                                            formatNumber(
-                                              servicesFeesItem,
-                                              formatType: FormatType.custom,
-                                              format: 'Php 0.00',
-                                              locale: '',
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  font: GoogleFonts.poppins(
-                                                    fontWeight: FontWeight.w600,
-                                                    fontStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontStyle,
-                                                  ),
-                                                  letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .fontStyle,
-                                                ),
-                                          );
-                                        }).divide(SizedBox(height: 4.0)),
-                                      );
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  24.0, 0.0, 24.0, 0.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Total Service Fee:',
+                                    'Unpaid Commision:',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -364,10 +198,12 @@ class _GcashPaymentPageWidgetState extends State<GcashPaymentPageWidget> {
                                   ),
                                   Text(
                                     formatNumber(
-                                      widget
-                                          .appointment!.appointmentServiceFee,
+                                      functions.getTotalCommission(widget
+                                          .unpaidCommTransactions!
+                                          .toList()),
                                       formatType: FormatType.custom,
-                                      format: 'Php 0.00',
+                                      currency: 'Php ',
+                                      format: '0.00',
                                       locale: '',
                                     ),
                                     style: FlutterFlowTheme.of(context)
@@ -402,7 +238,7 @@ class _GcashPaymentPageWidgetState extends State<GcashPaymentPageWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0.0, 0.7),
+                alignment: AlignmentDirectional(0.0, 0.8),
                 child: Builder(
                   builder: (context) => FFButtonWidget(
                     onPressed: () async {
@@ -423,9 +259,9 @@ class _GcashPaymentPageWidgetState extends State<GcashPaymentPageWidget> {
                               child: Container(
                                 height: 400.0,
                                 width: 390.0,
-                                child: ConfirmationPopUpWidget(
-                                  appointment: widget.appointment!,
-                                  shop: widget.shopDetails!,
+                                child: ConfirmationForCommsPopUpWidget(
+                                  listOfUnpaidCommsTransactions:
+                                      widget.unpaidCommTransactions!,
                                 ),
                               ),
                             ),

@@ -33,8 +33,11 @@ int getTotalCommission(List<TransactionsRecord> transactions) {
   int totalComms = 0;
 
   for (int i = 0; i < transactions.length; i++) {
-    int commission = (transactions[i].transactionServiceFee * 0.07).toInt();
-    totalComms += commission;
+    if (transactions[i].transactionIsPaid == false ||
+        transactions[i].transactionIsPaid == null) {
+      int commission = (transactions[i].transactionServiceFee * 0.07).toInt();
+      totalComms += commission;
+    }
   }
   return totalComms;
 }

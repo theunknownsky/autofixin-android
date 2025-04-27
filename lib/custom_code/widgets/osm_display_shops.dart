@@ -9,11 +9,11 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-import 'package:auto_fixin/components/shop_details/shop_details_widget.dart'
-    as wg;
-
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' as ll;
+
+import 'package:auto_fixin/components/shop_details/shop_details_widget.dart'
+    as wg;
 
 class OsmDisplayShops extends StatefulWidget {
   const OsmDisplayShops({

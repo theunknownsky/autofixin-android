@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'landing_page_model.dart';
 export 'landing_page_model.dart';
 
@@ -61,8 +62,21 @@ class _LandingPageWidgetState extends State<LandingPageWidget> {
                       'Welcome to\nAutoFixin',
                       textAlign: TextAlign.center,
                       style: FlutterFlowTheme.of(context).displaySmall.override(
-                            fontFamily: 'Poppins',
+                            font: GoogleFonts.poppins(
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .displaySmall
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .displaySmall
+                                  .fontStyle,
+                            ),
                             letterSpacing: 0.0,
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .displaySmall
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .displaySmall
+                                .fontStyle,
                           ),
                     ),
                   ),
@@ -72,8 +86,21 @@ class _LandingPageWidgetState extends State<LandingPageWidget> {
                     child: Text(
                       'Your Roadside Lifeline',
                       style: FlutterFlowTheme.of(context).labelLarge.override(
-                            fontFamily: 'Poppins',
+                            font: GoogleFonts.poppins(
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .labelLarge
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .labelLarge
+                                  .fontStyle,
+                            ),
                             letterSpacing: 0.0,
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .labelLarge
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .labelLarge
+                                .fontStyle,
                           ),
                     ),
                   ),
@@ -105,10 +132,23 @@ class _LandingPageWidgetState extends State<LandingPageWidget> {
                         textStyle: FlutterFlowTheme.of(context)
                             .bodyLarge
                             .override(
-                              fontFamily: 'Poppins',
+                              font: GoogleFonts.poppins(
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .bodyLarge
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .bodyLarge
+                                    .fontStyle,
+                              ),
                               color:
                                   FlutterFlowTheme.of(context).greenBGFontColor,
                               letterSpacing: 0.0,
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .bodyLarge
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyLarge
+                                  .fontStyle,
                             ),
                         elevation: 0.0,
                         borderRadius: BorderRadius.circular(50.0),
@@ -131,10 +171,23 @@ class _LandingPageWidgetState extends State<LandingPageWidget> {
                       textStyle: FlutterFlowTheme.of(context)
                           .bodyLarge
                           .override(
-                            fontFamily: 'Poppins',
+                            font: GoogleFonts.poppins(
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .bodyLarge
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyLarge
+                                  .fontStyle,
+                            ),
                             color:
                                 FlutterFlowTheme.of(context).blackBGFontColor,
                             letterSpacing: 0.0,
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .bodyLarge
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .bodyLarge
+                                .fontStyle,
                           ),
                       elevation: 0.0,
                       borderRadius: BorderRadius.circular(50.0),
@@ -147,18 +200,43 @@ class _LandingPageWidgetState extends State<LandingPageWidget> {
                       'By continuing, you accept our',
                       textAlign: TextAlign.center,
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Poppins',
+                            font: GoogleFonts.poppins(
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontStyle,
+                            ),
                             color: FlutterFlowTheme.of(context).secondaryText,
                             letterSpacing: 0.0,
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .fontStyle,
                           ),
                     ),
                   ),
                   Text(
                     'Terms of Service and Privacy Policy',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Poppins',
+                          font: GoogleFonts.poppins(
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .fontStyle,
+                          ),
                           color: FlutterFlowTheme.of(context).linkFontColor,
                           letterSpacing: 0.0,
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                           decoration: TextDecoration.underline,
                         ),
                   ),

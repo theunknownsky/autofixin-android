@@ -12,6 +12,8 @@ class RiderChatWithShopPageModel
   FocusNode? chatBoxFocusNode;
   TextEditingController? chatBoxTextController;
   String? Function(BuildContext, String?)? chatBoxTextControllerValidator;
+  // Stores action output result for [Backend Call - Read Document] action in Button widget.
+  UsersRecord? userToReport;
   // Stores action output result for [Backend Call - Create Document] action in sendMessage widget.
   MessagesRecord? sentMessage;
 

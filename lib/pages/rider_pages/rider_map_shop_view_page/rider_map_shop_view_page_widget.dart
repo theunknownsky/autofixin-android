@@ -1,5 +1,4 @@
 import '/backend/backend.dart';
-import '/components/rider_bottom_navbar/rider_bottom_navbar_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -101,22 +100,12 @@ class _RiderMapShopViewPageWidgetState
             children: [
               Container(
                 width: 390.0,
-                height: 710.0,
+                height: 790.0,
                 child: custom_widgets.OsmDisplayShops(
                   width: 390.0,
-                  height: 710.0,
+                  height: 790.0,
                   currentLocation: widget.currentLocation,
                   shopList: widget.shopList!,
-                ),
-              ),
-              Align(
-                alignment: AlignmentDirectional(0.0, 1.0),
-                child: wrapWithModel(
-                  model: _model.riderBottomNavbarModel,
-                  updateCallback: () => safeSetState(() {}),
-                  child: RiderBottomNavbarWidget(
-                    currentActiveNav: 1,
-                  ),
                 ),
               ),
             ],

@@ -1,5 +1,4 @@
 import '/backend/backend.dart';
-import '/components/rider_bottom_navbar/rider_bottom_navbar_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/index.dart';
@@ -62,14 +61,10 @@ class RiderAppointmentSheet2Model
   FormFieldController<int>? serviceDropdownValueController;
   // Stores action output result for [Backend Call - Create Document] action in submitButton widget.
   AppointmentsRecord? apptDoc;
-  // Model for riderBottomNavbar component.
-  late RiderBottomNavbarModel riderBottomNavbarModel;
 
   @override
   void initState(BuildContext context) {
     problemFieldTextControllerValidator = _problemFieldTextControllerValidator;
-    riderBottomNavbarModel =
-        createModel(context, () => RiderBottomNavbarModel());
   }
 
   @override
@@ -79,7 +74,5 @@ class RiderAppointmentSheet2Model
 
     problemFieldFocusNode?.dispose();
     problemFieldTextController?.dispose();
-
-    riderBottomNavbarModel.dispose();
   }
 }

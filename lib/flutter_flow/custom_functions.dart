@@ -114,3 +114,17 @@ bool checkShopIfOpen(
 
   return isShopOpened;
 }
+
+String getUserName(UsersRecord userToReport) {
+  String userName = "User";
+
+  if (userToReport.userType == 1) {
+    // rider
+    userName = userToReport.riderFirstName + " " + userToReport.riderLastName;
+  } else if (userToReport.userType == 2) {
+    // shop
+    userName = userToReport.shopName;
+  }
+
+  return userName;
+}

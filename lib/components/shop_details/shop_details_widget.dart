@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/components/report_pop_up/report_pop_up_widget.dart';
 import '/components/reviews/reviews_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -80,24 +81,92 @@ class _ShopDetailsWidgetState extends State<ShopDetailsWidget> {
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
-          Align(
-            alignment: AlignmentDirectional(1.0, 0.0),
-            child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 22.0, 22.0, 0.0),
-              child: InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  Navigator.pop(context);
-                },
-                child: Icon(
-                  Icons.close,
-                  color: FlutterFlowTheme.of(context).primaryText,
-                  size: 24.0,
+          Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(22.0, 22.0, 22.0, 0.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Builder(
+                  builder: (context) => InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      await showDialog(
+                        context: context,
+                        builder: (dialogContext) {
+                          return Dialog(
+                            elevation: 0,
+                            insetPadding: EdgeInsets.zero,
+                            backgroundColor: Colors.transparent,
+                            alignment: AlignmentDirectional(0.0, 0.0)
+                                .resolve(Directionality.of(context)),
+                            child: Container(
+                              height: 530.0,
+                              child: ReportPopUpWidget(
+                                userToReport: widget.shop!,
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Icon(
+                          Icons.report_problem_rounded,
+                          color: Color(0xFFDB000D),
+                          size: 24.0,
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              8.0, 0.0, 0.0, 0.0),
+                          child: Text(
+                            'Report',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  font: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.bold,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                                  color: Color(0xFFDB000D),
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.bold,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
+                                ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
+                Align(
+                  alignment: AlignmentDirectional(1.0, 0.0),
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      Navigator.pop(context);
+                    },
+                    child: Icon(
+                      Icons.close,
+                      color: FlutterFlowTheme.of(context).primaryText,
+                      size: 24.0,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           Column(
@@ -444,24 +513,88 @@ class _ShopDetailsWidgetState extends State<ShopDetailsWidget> {
                               getCurrentTimestamp)
                           ? null
                           : () async {
-                              context.pushNamed(
-                                RiderAppointmentSheet1Widget.routeName,
-                                queryParameters: {
-                                  'shopId': serializeParam(
-                                    widget.shop?.reference,
-                                    ParamType.DocumentReference,
+                              if ((currentUserDocument?.userAppointments
+                                              .toList() ??
+                                          [])
+                                      .length >
+                                  0) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'You already have an appointment.',
+                                      style: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                      ),
+                                    ),
+                                    duration: Duration(milliseconds: 4000),
+                                    backgroundColor:
+                                        FlutterFlowTheme.of(context)
+                                            .blackButton,
                                   ),
-                                  'shop': serializeParam(
-                                    widget.shop,
-                                    ParamType.Document,
+                                );
+                                Navigator.pop(context);
+                              } else if (widget.shop!.userAppointments.length >
+                                  0) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Shop currently have an appointment.',
+                                      style: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                      ),
+                                    ),
+                                    duration: Duration(milliseconds: 4000),
+                                    backgroundColor:
+                                        FlutterFlowTheme.of(context)
+                                            .blackButton,
                                   ),
-                                }.withoutNulls,
-                                extra: <String, dynamic>{
-                                  'shop': widget.shop,
-                                },
-                              );
+                                );
+                                Navigator.pop(context);
+                              } else {
+                                if ((currentUserDocument?.riderVehicles
+                                                .toList() ??
+                                            [])
+                                        .length >
+                                    0) {
+                                  context.pushNamed(
+                                    RiderAppointmentSheet1Widget.routeName,
+                                    queryParameters: {
+                                      'shopId': serializeParam(
+                                        widget.shop?.reference,
+                                        ParamType.DocumentReference,
+                                      ),
+                                      'shop': serializeParam(
+                                        widget.shop,
+                                        ParamType.Document,
+                                      ),
+                                    }.withoutNulls,
+                                    extra: <String, dynamic>{
+                                      'shop': widget.shop,
+                                    },
+                                  );
 
-                              Navigator.pop(context);
+                                  Navigator.pop(context);
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'Please add a vehicle first.',
+                                        style: TextStyle(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                        ),
+                                      ),
+                                      duration: Duration(milliseconds: 4000),
+                                      backgroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .blackButton,
+                                    ),
+                                  );
+                                  Navigator.pop(context);
+                                }
+                              }
                             },
                       text: 'Book an Appointment',
                       options: FFButtonOptions(

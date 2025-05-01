@@ -1,8 +1,10 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/components/report_pop_up/report_pop_up_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -158,24 +160,114 @@ class _RiderChatWithShopPageWidgetState
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 12.0, 0.0, 6.0),
                                   child: FFButtonWidget(
-                                    onPressed: () async {
-                                      context.pushNamed(
-                                        RiderAppointmentSheet1Widget.routeName,
-                                        queryParameters: {
-                                          'shopId': serializeParam(
-                                            containerUsersRecord?.reference,
-                                            ParamType.DocumentReference,
-                                          ),
-                                          'shop': serializeParam(
-                                            containerUsersRecord,
-                                            ParamType.Document,
-                                          ),
-                                        }.withoutNulls,
-                                        extra: <String, dynamic>{
-                                          'shop': containerUsersRecord,
-                                        },
-                                      );
-                                    },
+                                    onPressed: !functions.checkShopIfOpen(
+                                            containerUsersRecord!
+                                                .shopOpeningHour!,
+                                            containerUsersRecord
+                                                .shopClosingHour!,
+                                            getCurrentTimestamp)
+                                        ? null
+                                        : () async {
+                                            if ((currentUserDocument
+                                                            ?.userAppointments
+                                                            .toList() ??
+                                                        [])
+                                                    .length >
+                                                0) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    'You already have an appointment.',
+                                                    style: TextStyle(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                    ),
+                                                  ),
+                                                  duration: Duration(
+                                                      milliseconds: 4000),
+                                                  backgroundColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .blackButton,
+                                                ),
+                                              );
+                                            } else if (containerUsersRecord
+                                                    .userAppointments.length >
+                                                0) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    'Shop currently have an appointment.',
+                                                    style: TextStyle(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                    ),
+                                                  ),
+                                                  duration: Duration(
+                                                      milliseconds: 4000),
+                                                  backgroundColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .blackButton,
+                                                ),
+                                              );
+                                            } else {
+                                              if ((currentUserDocument
+                                                              ?.riderVehicles
+                                                              .toList() ??
+                                                          [])
+                                                      .length >
+                                                  0) {
+                                                context.pushNamed(
+                                                  RiderAppointmentSheet1Widget
+                                                      .routeName,
+                                                  queryParameters: {
+                                                    'shopId': serializeParam(
+                                                      containerUsersRecord
+                                                          .reference,
+                                                      ParamType
+                                                          .DocumentReference,
+                                                    ),
+                                                    'shop': serializeParam(
+                                                      containerUsersRecord,
+                                                      ParamType.Document,
+                                                    ),
+                                                  }.withoutNulls,
+                                                  extra: <String, dynamic>{
+                                                    'shop':
+                                                        containerUsersRecord,
+                                                  },
+                                                );
+                                              } else {
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  SnackBar(
+                                                    content: Text(
+                                                      'Please add a vehicle first.',
+                                                      style: TextStyle(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
+                                                      ),
+                                                    ),
+                                                    duration: Duration(
+                                                        milliseconds: 4000),
+                                                    backgroundColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .blackButton,
+                                                  ),
+                                                );
+                                              }
+                                            }
+                                          },
                                     text: 'Set an appointment',
                                     options: FFButtonOptions(
                                       width: 150.0,
@@ -209,6 +301,7 @@ class _RiderChatWithShopPageWidgetState
                                           ),
                                       elevation: 0.0,
                                       borderRadius: BorderRadius.circular(24.0),
+                                      disabledColor: Color(0xFF62AA95),
                                     ),
                                   ),
                                 ),
@@ -569,29 +662,74 @@ class _RiderChatWithShopPageWidgetState
                                   ),
                                 ),
                               ),
-                              FFButtonWidget(
-                                onPressed: () {
-                                  print('Button pressed ...');
-                                },
-                                text: '',
-                                icon: Icon(
-                                  Icons.camera_alt_outlined,
-                                  color: Colors.black,
-                                  size: 15.0,
-                                ),
-                                options: FFButtonOptions(
-                                  height:
-                                      MediaQuery.sizeOf(context).height * 1.0,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      16.0, 0.0, 16.0, 0.0),
-                                  iconAlignment: IconAlignment.end,
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  color: Colors.white,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .override(
-                                        font: GoogleFonts.poppins(
+                              Builder(
+                                builder: (context) => FFButtonWidget(
+                                  onPressed: () async {
+                                    _model.userToReport =
+                                        await UsersRecord.getDocumentOnce(
+                                            widget.chatShop!.shopReference!);
+                                    await showDialog(
+                                      context: context,
+                                      builder: (dialogContext) {
+                                        return Dialog(
+                                          elevation: 0,
+                                          insetPadding: EdgeInsets.zero,
+                                          backgroundColor: Colors.transparent,
+                                          alignment: AlignmentDirectional(
+                                                  0.0, 0.0)
+                                              .resolve(
+                                                  Directionality.of(context)),
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              FocusScope.of(dialogContext)
+                                                  .unfocus();
+                                              FocusManager.instance.primaryFocus
+                                                  ?.unfocus();
+                                            },
+                                            child: Container(
+                                              height: 530.0,
+                                              child: ReportPopUpWidget(
+                                                userToReport:
+                                                    _model.userToReport!,
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+
+                                    safeSetState(() {});
+                                  },
+                                  text: '',
+                                  icon: Icon(
+                                    Icons.report_problem_rounded,
+                                    color: Color(0xFFDB000D),
+                                    size: 24.0,
+                                  ),
+                                  options: FFButtonOptions(
+                                    height:
+                                        MediaQuery.sizeOf(context).height * 1.0,
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    iconAlignment: IconAlignment.end,
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    color: Colors.white,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          font: GoogleFonts.poppins(
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .fontStyle,
+                                          ),
+                                          color: Colors.white,
+                                          letterSpacing: 0.0,
                                           fontWeight:
                                               FlutterFlowTheme.of(context)
                                                   .titleSmall
@@ -601,17 +739,9 @@ class _RiderChatWithShopPageWidgetState
                                                   .titleSmall
                                                   .fontStyle,
                                         ),
-                                        color: Colors.white,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .fontStyle,
-                                      ),
-                                  elevation: 0.0,
-                                  borderRadius: BorderRadius.circular(24.0),
+                                    elevation: 0.0,
+                                    borderRadius: BorderRadius.circular(24.0),
+                                  ),
                                 ),
                               ),
                             ],

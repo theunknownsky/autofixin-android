@@ -1,7 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/get_shop_location_component/get_shop_location_component_widget.dart';
-import '/components/rider_bottom_navbar/rider_bottom_navbar_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -955,16 +954,6 @@ class _RiderAppointmentSheet2WidgetState
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                ),
-                Align(
-                  alignment: AlignmentDirectional(0.0, 1.0),
-                  child: wrapWithModel(
-                    model: _model.riderBottomNavbarModel,
-                    updateCallback: () => safeSetState(() {}),
-                    child: RiderBottomNavbarWidget(
-                      currentActiveNav: 1,
                     ),
                   ),
                 ),
